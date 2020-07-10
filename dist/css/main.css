@@ -4582,19 +4582,156 @@ html,
 body {
   height: 100%;
 }
-/* for sticky footer */
-.body-wrapper {
-  display: table;
-  height: 100%;
-  width: 100%;
-}
 nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.highlighter-rouge {
-  margin-top: 0.9375em;
+details summary:focus {
+  border: none;
+  outline: 1px dotted #0072ce;
+  outline-offset: 2px;
+}
+details summary:hover {
+  cursor: pointer;
+}
+details summary::-webkit-details-marker {
+  display: none;
+}
+details summary {
+  position: relative;
+}
+details summary:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 10px;
+  display: block;
+  content: '';
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 988.2 1200" fill="rgb(16, 24, 32)"><path d="M494.1 967.2c-17.3 0-33.8-6.8-46-19L18.6 518.6c-25.1-25.6-24.8-66.8.8-91.9 25.3-24.8 65.8-24.8 91.1 0l383.6 383.6 383.6-383.6c25.6-25.1 66.8-24.8 91.9.8 24.8 25.3 24.8 65.8 0 91.1L540.1 948.1c-12.2 12.2-28.7 19.1-46 19.1z"/></svg>');
+}
+details[open] summary:after {
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 988.7 1200" fill="rgb(16, 24, 32)"><path d="M923.6 967.6c-17.3 0-33.8-6.8-46-19L494.1 565 110.5 948.5c-25.6 25.1-66.8 24.8-91.9-.8-24.8-25.3-24.8-65.8 0-91.1l429.5-429.5c25.4-25.4 66.5-25.4 91.9 0l429.6 429.5c25.4 25.4 25.4 66.5.1 91.9-12.3 12.3-28.8 19.1-46.1 19.1z"/></svg>');
+}
+.m-global-eyebrow .a-tagline,
+.site-header,
+.ds-footer {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+.m-global-eyebrow {
+  padding-left: 30px;
+}
+.m-global-eyebrow .a-tagline {
+  max-width: 1140px;
+}
+main {
+  max-width: 1170px;
+  margin: 30px auto;
+  padding: 0 30px;
+}
+.ds-sidebar,
+.ds-content {
+  display: table-cell;
+  vertical-align: top;
+}
+.ds-sidebar {
+  width: 250px;
+  padding-right: 30px;
+  border-right: 1px solid #b4b5b6;
+  padding-bottom: 30px;
+}
+.ds-content {
+  padding-left: 30px;
+}
+@media only all and (max-width: 37.5em) {
+  main {
+    padding: 0;
+    margin-top: 0;
+  }
+  .ds-sidebar,
+  .ds-content {
+    display: block;
+  }
+  .ds-content {
+    padding-left: 15px;
+  }
+  .ds-sidebar {
+    width: auto;
+    border-right: none;
+    padding-right: 0;
+  }
+  .m-global-eyebrow,
+  .ds-footer {
+    padding: 0 15px;
+  }
+}
+.ds-nav a {
+  border-bottom-width: 0;
+}
+.ds-nav a:hover {
+  border-bottom-width: 1px;
+}
+.ds-nav ul:last-child {
+  margin-bottom: 30px;
+}
+.ds-nav > .h5:first-of-type {
+  margin-top: 0;
+}
+.ds-nav__subnav .h5,
+.ds-nav__subnav ul {
+  margin-left: 15px;
+}
+.ds-nav__subnav .h6 {
+  margin-left: 30px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+@media only all and (min-width: 37.5625em) {
+  .ds-nav-container > summary {
+    display: none;
+  }
+  .ds-nav-container > .m-list > .m-list_item {
+    margin-bottom: 15px;
+  }
+  .ds-nav {
+    margin-left: 15px;
+  }
+  .ds-nav-1 {
+    border-bottom: 1px solid #b4b5b6;
+  }
+}
+@media only all and (max-width: 37.5em) {
+  .ds-nav .h4 {
+    margin-bottom: 0;
+  }
+  .ds-nav-2 {
+    margin-top: 15px;
+  }
+  .ds-nav-container {
+    border-top: 1px solid #b4b5b6;
+    border-bottom: 1px solid #b4b5b6;
+  }
+  .ds-nav-container > summary {
+    padding: 15px;
+    margin-bottom: 0;
+  }
+  .ds-nav-container > summary:after {
+    top: 20px;
+    right: 15px;
+  }
+  .ds-nav-container > .m-list {
+    padding: 15px;
+    padding-top: 0;
+  }
+}
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.ds-footer a {
+  border-bottom-width: 1px;
 }
 /* ==========================================================================
    cfgov-refresh
@@ -4754,8 +4891,6 @@ input.skip-nav_link:focus::-moz-focus-inner {
 }
 .m-global-eyebrow {
   font-size: 0.75em;
-}
-.m-global-eyebrow__horizontal {
   padding-top: 0.625em;
   padding-bottom: 0.625em;
   background: #f7f8f9;
@@ -4785,16 +4920,14 @@ input.skip-nav_link:focus::-moz-focus-inner {
 /* ==========================================================================
    Header
    ========================================================================== */
-.site-header .content-l_col + .content-l_col {
-  margin-top: 0;
-}
-.title_heading {
+.title {
   font-size: 1em;
+  margin-top: 30px;
 }
-.title_heading a {
+.title a {
   color: #5a5d61;
 }
-.title_heading .demi {
+.title .demi {
   font-weight: bold;
 }
 .global-nav_list {
@@ -4804,24 +4937,61 @@ input.skip-nav_link:focus::-moz-focus-inner {
   font-weight: 500;
   vertical-align: middle;
 }
-@media only all and (min-width: 37.5em) {
+@media only all and (max-width: 37.5em) {
   .site-header {
-    padding: 1.875em 0;
-    border-bottom: 4px solid #20aa3f;
+    background-color: #f7f8f9;
+    display: table;
+    width: 100%;
+    padding: 0;
   }
-  .site-header .content-l_col {
-    vertical-align: middle;
+  .title {
+    display: table-header-group;
+    margin-top: 0;
   }
-  .title_heading {
-    font-size: 1em;
-    margin: 0;
+  .title-link {
+    margin-top: 15px;
+    margin-left: 15px;
+    display: block;
   }
-  .global-nav {
-    text-align: right;
+  #search-form {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-left: 15px;
   }
   .global-nav_list {
+    width: 100%;
+  }
+  .nav-list-item:first-child a {
+    border-top: 1px solid #d2d3d5;
+  }
+  .nav-list-item a {
+    display: block;
+    border-bottom: 1px solid #d2d3d5;
+    padding: 1em;
+  }
+}
+@media only all and (min-width: 37.5625em) {
+  #search-form {
+    margin: 0;
+    float: right;
+  }
+  .site-header-wrapper {
+    padding-bottom: 1em;
+    border-bottom: 4px solid #20aa3f;
+  }
+  .site-header {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+  .title {
+    font-size: 1.625em;
+  }
+  .nav-list-item {
     display: inline-block;
-    font-size: 0.75em;
+  }
+  .global-nav_list {
+    font-size: 1em;
   }
   .nav-list-item {
     display: inline-block;
@@ -4840,34 +5010,6 @@ input.skip-nav_link:focus::-moz-focus-inner {
   }
   .nav-list-item:last-child {
     margin-right: 0px;
-  }
-}
-@media only all and (min-width: 56.25em) {
-  .title_heading {
-    font-size: 1.625em;
-  }
-  .global-nav_list {
-    font-size: 1em;
-  }
-}
-@media only all and (max-width: 37.5em) {
-  .site-header {
-    background-color: #f7f8f9;
-  }
-  .title_heading {
-    padding-left: 1em;
-    padding-top: 0.75em;
-  }
-  .global-nav_list {
-    width: 100%;
-  }
-  .nav-list-item:first-child a {
-    border-top: 1px solid #d2d3d5;
-  }
-  .nav-list-item a {
-    display: block;
-    border-bottom: 1px solid #d2d3d5;
-    padding: 1em;
   }
 }
 /* ==========================================================================
@@ -5036,79 +5178,6 @@ input.skip-nav_link:focus::-moz-focus-inner {
     border-bottom: 1px solid #e7e8e9;
     margin-bottom: 1em;
   }
-}
-/* ==========================================================================
-   Footer
-   ========================================================================== */
-.site-footer {
-  display: table-row;
-  /* for sticky footer */
-  height: 1px;
-  /* for sticky footer */
-  background: #e7e8e9;
-}
-.site-footer_wrapper {
-  padding: 2em 0;
-}
-/* ==========================================================================
-   Secondary Nav
-   Creates an expandable show/hide toggle nav on small screens, and a regular left sidebar on large screens
-   Use the following classes on the sidebar container element to add this styling:
-        .content_sidebar
-        .o-expandable
-        .o-expandable__padded
-        .o-expandable__background
-    And use these for child div where the navigation links are:
-        .o-expandable_content
-        .nav-secondary
-   ========================================================================== */
-.content_sidebar.o-expandable {
-  padding: 0.46875em 0px 0px;
-}
-@media only all and (min-width: 56.3125em) {
-  .content_sidebar.o-expandable .o-expandable_header {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    border: 0;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-  }
-}
-@media only all and (min-width: 56.3125em) {
-  .content_sidebar.o-expandable .o-expandable_content {
-    margin-top: 1.875em;
-    padding-left: 0;
-  }
-}
-@media only all and (min-width: 56.3125em) {
-  .content_sidebar.o-expandable .o-expandable_content__collapsed {
-    max-height: initial !important;
-    overflow: visible;
-    display: block;
-  }
-}
-@media only all and (min-width: 56.3125em) {
-  .content_sidebar.o-expandable__padded .o-expandable_content:before {
-    border: none;
-  }
-}
-@media only all and (min-width: 56.3125em) {
-  .content_sidebar.o-expandable__background {
-    background: transparent;
-  }
-}
-.content_sidebar .m-list_link {
-  border: none;
-}
-.content_sidebar .m-list_link:visited {
-  color: #0072ce;
-}
-.content_sidebar .m-list_link:hover {
-  border-bottom: 1px solid #254b87;
-  color: #254b87;
 }
 /* ==========================================================================
    Syntax highlighting
@@ -5802,9 +5871,6 @@ pre code {
   right: 30px;
   z-index: 1;
 }
-.o-editor_link#edit-page {
-  bottom: 75px;
-}
 .o-editor_link .a-btn {
   border-radius: 8px;
   box-shadow: 1px 1px 3px #999;
@@ -5823,9 +5889,6 @@ pre code {
   border-left: 1px solid #80b9e7;
   margin-left: 0.4375em;
 }
-.t-homepage .o-editor_link#edit-page {
-  bottom: 30px;
-}
 .frame-content #toggle-code {
   display: none;
 }
@@ -5837,7 +5900,7 @@ pre code {
    ========================================================================== */
 @media (min-width: 40.0625em) {
   .govuk-tabs {
-    margin: 0 -2rem 2rem;
+    margin: 0 -1rem;
   }
 }
 .govuk-tabs__list {
@@ -5987,7 +6050,7 @@ pre code {
 .a-toggle_code {
   border-bottom: 1px solid #b4b5b6;
   text-align: right;
-  margin: 0 -2rem;
+  margin: 0 -1rem;
   padding: 0 2rem 1rem;
 }
 .a-toggle_code .a-btn {
@@ -6030,18 +6093,21 @@ pre code {
   }
 }
 .o-variation_group {
-  border: 1px solid #b4b5b6;
-  border-bottom: none;
+  border: 5px solid #e7e8e9;
   margin: 2rem 0;
-  padding: 2rem 2rem 0;
 }
 .o-variation_group_title {
-  border-bottom: 1px solid #b4b5b6;
+  background: #e7e8e9;
   margin-bottom: 2rem;
-  padding-bottom: 1rem;
+  padding: 1rem;
 }
 .o-variation_group_description {
   margin-bottom: 2rem;
+}
+.o-variation_group_description,
+.o-variation_group .m-variation {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 .m-variation_name {
   margin-top: 2rem;
@@ -6054,6 +6120,18 @@ pre code {
 }
 .variation-code-specs td {
   background-color: #fff;
+}
+.component-restrictions_heading-do svg {
+  color: #20aa3f;
+}
+.component-restrictions_heading-donot svg {
+  color: #d14124;
+}
+.m-list__horizontal-spaced {
+  margin-bottom: 1.875em;
+}
+.m-list__horizontal-spaced > .m-list_item {
+  margin-bottom: 0.9375em;
 }
 /* Color swatches for Identity/Color page
    ========================================================================== */
@@ -6352,14 +6430,6 @@ pre code {
 }
 .color-table td:not( :first-of-type ) {
   white-space: nowrap;
-}
-#search-form {
-  float: right;
-}
-#search-form,
-#search-results {
-  margin: 15px;
-  margin-left: 8px;
 }
 #search-results {
   list-style: none;

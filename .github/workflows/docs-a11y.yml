@@ -2,8 +2,9 @@ name: Run Lighthouse against the docs
 
 on:
   # Run every night at midnight UTC.
+  # Temporarily try triggering every 5 minutes.
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   lighthouseci:

@@ -516,7 +516,7 @@
             'behavior': "Below the 901 pixel breakpoint, the sub-navigation collapses into the global navigation under a hamburger menu, as seen on the Regulatory agenda page.\n\nAlso below the 901 pixel breakpoint, if a browse page has child browse pages, the children appear in a special expandable navigation at the top of the page, as seen on the TRID guidance page.\n\n\n  \n    \n      Above 900 px\n      Below 901 px\n    \n  \n  \n    \n      \n      \n    \n  \n\n",
             'accessibility': "\n",
             'research': "\n",
-            'related_items': "Page introductions\n\n  Text introduction\n\n\nContent\n\n  Image and text component\n  Text component\n  Featured content module\n  Wells\n  Expandables\n  Tables\n  Email signup form\n\n",
+            'related_items': "Page introductions\n\n\n  Text introduction\n\n\nContent\n\n\n  Image and text component\n  Text component\n  Featured content module\n  Wells\n  Expandables\n  Tables\n  Email signup form\n\n",
             'url': 'pages/browse-pages'
         }
         ,
@@ -555,11 +555,11 @@
                 
                     'variation_name3': 'Disabled buttons',
                     'variation_description3': "\n",
-                    'variation_code_snippet3': `&lt;button class=&quot;a-btn a-btn__disabled&quot; title=&quot;Default state&quot;&gt;Default state&lt;/button&gt;
+                    'variation_code_snippet3': `&lt;button class=&quot;a-btn a-btn__disabled&quot; title=&quot;Default state&quot; disabled&gt;Default state&lt;/button&gt;
 
-&lt;button class=&quot;a-btn a-btn__disabled hover&quot; title=&quot;Hovered state&quot;&gt;Hovered state&lt;/button&gt;
+&lt;button class=&quot;a-btn a-btn__disabled hover&quot; title=&quot;Hovered state&quot; disabled&gt;Hovered state&lt;/button&gt;
 
-&lt;button class=&quot;a-btn a-btn__disabled focus&quot; title=&quot;Focused state&quot;&gt;Focused state&lt;/button&gt;`,
+&lt;button class=&quot;a-btn a-btn__disabled focus&quot; title=&quot;Focused state&quot; disabled&gt;Focused state&lt;/button&gt;`,
                 
                     'variation_name4': 'Destructive buttons',
                     'variation_description4': "\n",
@@ -639,13 +639,11 @@
                 
                     'variation_name2': 'Animated icon',
                     'variation_description2': "Use an animated icon in a button to reassure the user that the action they are attempting to perform is functioning as intended.\n\n",
-                    'variation_code_snippet2': `&lt;!--
-&lt;button class=&quot;a-btn&quot;&gt;
+                    'variation_code_snippet2': `&lt;button class=&quot;a-btn&quot;&gt;
     Submit your complaint
     &lt;span class=&quot;a-btn_icon
                  a-btn_icon__on-right&quot;&gt;{% include icons/updating.svg %}&lt;/span&gt;
-&lt;/button&gt;
---&gt;`,
+&lt;/button&gt;`,
                 
             
 
@@ -1185,8 +1183,8 @@
 &lt;br&gt;
 &lt;!--Disabled/selected--&gt;
 &lt;div class=&quot;m-form-field m-form-field__checkbox&quot;&gt;
-    &lt;input class=&quot;a-checkbox&quot; type=&quot;checkbox&quot; id=&quot;test_checkbox_basic_disabled&quot; disabled checked&gt;
-    &lt;label class=&quot;a-label&quot; for=&quot;test_checkbox_basic_disabled&quot;&gt;Disabled/selected&lt;/label&gt;
+    &lt;input class=&quot;a-checkbox&quot; type=&quot;checkbox&quot; id=&quot;test_checkbox_basic_disabled_selected&quot; disabled checked&gt;
+    &lt;label class=&quot;a-label&quot; for=&quot;test_checkbox_basic_disabled_selected&quot;&gt;Disabled/selected&lt;/label&gt;
 &lt;/div&gt;`,
                 
             
@@ -1640,7 +1638,7 @@
             'behavior': "Below the 901 pixel breakpoint, the sidebar stacks below the main content area.\n\n\n  \n    \n      Above 900 px\n      Below 901 px\n    \n  \n  \n    \n      \n      \n    \n  \n\n\nPost preview\n\nWhen document detail pages are accessed via entries within a filterable list, information about each page is displayed on filterable list pages via the post preview component.\n\nPost preview within a filterable list\n\n\n  \n    \n      Above 600 px\n      Below 601 px\n    \n  \n  \n    \n      \n      \n    \n  \n\n",
             'accessibility': "\n",
             'research': "\n",
-            'related_items': "Pages\n\n  Learn page\n  Filterable list page\n\n\nPage introductions\n\n  Item introduction\n\n\nContent\n\n  Tables\n  Expandables\n  Metadata / Related posts / Related links\n  Email sign-up form\n\n",
+            'related_items': "Pages\n\n\n  Learn page\n  Filterable list page\n\n\nPage introductions\n\n\n  Item introduction\n\n\nContent\n\n\n  Tables\n  Expandables\n  Metadata / Related posts / Related links\n  Email sign-up form\n\n",
             'url': 'pages/document-detail-pages'
         }
         ,
@@ -2119,7 +2117,7 @@
             'guidelines': "\n",
             'behavior': "Collapsed\n\nThe default collapsed state should include the expand/collapse minicon within a circle and a label (if space allows). The Show/Hide label can be hidden at narrower screen widths to prevent titles prematurely breaking onto multiple lines and to reduced visual clutter.\n\nExpanded\n\nThe content of an expandable can contain normal paragraphs, headings, lists, wells, and images.\n\nExpandables can make use of an optional stroke under the title when expanded. The title stroke can help to define the title from the expanded content for longer sections of text. It should be indented left and right to match the text within the expandable section.\n",
             'accessibility': "The find function will not discover information hidden by a collapsed expandable, so use good judgement in deciding which information to hide. Non-javaScript users should default to the expanded state. Otherwise, the default state (expanded or collapsed) will depend on the circumstance.\n",
-            'research': "Google Tag Manager\n\nBelow is a list of items that Digital Analytics references in the tag that captures expandables.\nTAG ITEMS\n\nCategory: Page Interaction (hardcoded)\n\nAction: Dropdown (hardcoded)\n\nLabel: where {{element}} = element clicked\n\nvar elem = {{element}};\n\nvar closestElem = closest(elem, '.o-expandable_target');\nvar textElem = closestElem.querySelector('.o-expandable_label') || closestElem.querySelector('.o-expandable_cue')\n;\nvar text = textElem.textContent.trim();\nreturn text;\n\n\nOR\n\nvar elem = {{element}};\nvar closestElem = closest(elem, '.expandable_target');\nvar text = closestElem.querySelector('.expandable_label').textContent.trim();\nreturn text;\n\n\nTRIGGER ITEMS\n\nElement has a parentNode with className matching RegEx expandable_header|expandable__padded.\n\nElement has parentNode with a className that does not contain nav-secondary, since the secondary navigation at mobile uses an expandable as well.\n",
+            'research': "Google Tag Manager\n\nBelow is a list of items that Digital Analytics references in the tag that captures expandables.\n\nTag items\n\nCategory: Page Interaction (hardcoded)\n\nAction: Dropdown (hardcoded)\n\nLabel: where {{element}} = element clicked\n\nvar elem = {{element}};\n\nvar closestElem = closest(elem, '.o-expandable_target');\nvar textElem = closestElem.querySelector('.o-expandable_label') || closestElem.querySelector('.o-expandable_cue')\n;\nvar text = textElem.textContent.trim();\nreturn text;\n\n\nOR\n\nvar elem = {{element}};\nvar closestElem = closest(elem, '.expandable_target');\nvar text = closestElem.querySelector('.expandable_label').textContent.trim();\nreturn text;\n\n\nTrigger items\n\nElement has a parentNode with className matching RegEx expandable_header|expandable__padded.\n\nElement has parentNode with a className that does not contain nav-secondary, since the secondary navigation at mobile uses an expandable as well.\n",
             'related_items': "\n  Expandables variables\n\n",
             'url': 'components/expandables'
         }
@@ -2456,7 +2454,7 @@ Basic legend
             'behavior': "For responsive behavior, see guidance for the sublanding page and browse page.\n",
             'accessibility': "\n",
             'research': "\n",
-            'related_items': "Pages\n\n  Document detail pages\n  Sublanding page\n  Browse page\n\n\nPage introductions\n\n  Heroes\n  Text introduction\n\n\nContent\n\n  Filterable list control panels\n  Featured content module\n  Post preview of document detail pages\n  Pagination\n  Email sign-up form\n\n",
+            'related_items': "Pages\n\n\n  Document detail pages\n  Sublanding page\n  Browse page\n\n\nPage introductions\n\n\n  Heroes\n  Text introduction\n\n\nContent\n\n\n  Filterable list control panels\n  Featured content module\n  Post preview of document detail pages\n  Pagination\n  Email sign-up form\n\n",
             'url': 'pages/filterable-list-pages'
         }
         ,
@@ -2474,15 +2472,15 @@ Basic legend
 
                 
                     'variation_name1': 'Option 1: Single page',
-                    'variation_description1': "All sections are positioned on a single page.\n\n\n\nThe good\n\n  There’s only one submit button to press\n  A single URL gives access to all form fields\n  It doesn’t force a fixed order of completion\n  You benefit from context of neighboring sections\n  Progress is self-evident\n\n\nThe bad\n\n  Long forms can be overwhelming and off-putting\n  It’s less well suited to branching or non-linear flow\n  How do you save partial progress?\n  Can be harder to track analytics like drop-off rates\n\n\n",
+                    'variation_description1': "All sections are positioned on a single page.\n\n\n\nThe good\n\n\n  There’s only one submit button to press\n  A single URL gives access to all form fields\n  It doesn’t force a fixed order of completion\n  You benefit from context of neighboring sections\n  Progress is self-evident\n\n\nThe bad\n\n\n  Long forms can be overwhelming and off-putting\n  It’s less well suited to branching or non-linear flow\n  How do you save partial progress?\n  Can be harder to track analytics like drop-off rates\n\n",
                     'variation_code_snippet1': ``,
                 
                     'variation_name2': 'Option 2: Wizard',
-                    'variation_description2': "Each section goes on its own page.\n\n\n\nThe good\n\n  It’s easier to handle branching and dependencies between sections\n  It’s easier to let the user save progress\n  A long form can feel more manageable\n  Easier to guide a user through an unfamiliar process\n  Easier to capture analytics like drop-off rates for each section\n\n\nThe bad\n\n  Can be harder for users to see where they are within the form\n  It can slow users down as they have to click and load each section\n  You lose the contextual information from neighboring sections\n  Harder for users to review and edit previous sections\n  There’s no single place for users to go back and edit their data\n  Not a natural fit for non-linear processes like looping, adding and removing\n\n",
+                    'variation_description2': "Each section goes on its own page.\n\n\n\nThe good\n\n\n  It’s easier to handle branching and dependencies between sections\n  It’s easier to let the user save progress\n  A long form can feel more manageable\n  Easier to guide a user through an unfamiliar process\n  Easier to capture analytics like drop-off rates for each section\n\n\nThe bad\n\n\n  Can be harder for users to see where they are within the form\n  It can slow users down as they have to click and load each section\n  You lose the contextual information from neighboring sections\n  Harder for users to review and edit previous sections\n  There’s no single place for users to go back and edit their data\n  Not a natural fit for non-linear processes like looping, adding and removing\n\n",
                     'variation_code_snippet2': ``,
                 
                     'variation_name3': 'Option 3: Accordion',
-                    'variation_description3': "All sections on a single page, but each new section only appears once the previous section has been completed. Done well, option 3 is a hybrid of the other two that has benefits of both the other options.\n\nWithin this hybrid option there are still some important design decisions to make, for example:\n\n  Will future questions be shown in any way or will you only see the questions you’ve answered?\n  What happens if you go back and edit a previous question?\n  Does the current question stay open or closed?\n  How do you get back to the current question once you’ve edited a previous one?\n  Do you lose all your answers to questions that follow the one you go back to edit?\n\n\n\n\nThe good\n\n  Can handle branching and dependencies between sections\n  Can easily review and edit previous questions\n  Can help guide a user through an unfamiliar process\n  User still benefits from some surrounding context\n  Progress is clear\n\n\nThe bad\n\n  Implementation and interface is more complex\n\n",
+                    'variation_description3': "All sections on a single page, but each new section only appears once the previous section has been completed. Done well, option 3 is a hybrid of the other two that has benefits of both the other options.\n\nWithin this hybrid option there are still some important design decisions to make, for example:\n\n\n  Will future questions be shown in any way or will you only see the questions you’ve answered?\n  What happens if you go back and edit a previous question?\n  Does the current question stay open or closed?\n  How do you get back to the current question once you’ve edited a previous one?\n  Do you lose all your answers to questions that follow the one you go back to edit?\n\n\n\n\nThe good\n\n\n  Can handle branching and dependencies between sections\n  Can easily review and edit previous questions\n  Can help guide a user through an unfamiliar process\n  User still benefits from some surrounding context\n  Progress is clear\n\n\nThe bad\n\n\n  Implementation and interface is more complex\n\n",
                     'variation_code_snippet3': ``,
                 
                     'variation_name4': 'Option 4: Hybrid',
@@ -3172,7 +3170,7 @@ The text will be styled the same as H5 heading text.
                     'variation_code_snippet5': ``,
                 
                     'variation_name6': '&quot;Small text utility&quot; mixin',
-                    'variation_description6': "CLASS\n\nSets the element to 14px (in ems).\n\nTo be used on default 16px text only. To use on text set to another size, use the mixin below.\n\n.u-small-text\n\nMIXIN\n\nSets the element to 14px (in ems) based on the text size passed as @context.\n\n.u-small-text(@context)\n\n// Ex.\n.example {\n  font-size: unit(20px / @base-font-size-px, em);\n\n  small {\n    .u-small-text(20px);\n  }\n}\n\n// Compiles to\n.example {\n  font-size: 1.25em;\n}\n\n.example small {\n  font-size: 0.7em;\n}\n\n",
+                    'variation_description6': "Class\n\nSets the element to 14px (in ems).\n\nTo be used on default 16px text only. To use on text set to another size, use the mixin below.\n\n.u-small-text\n\nMixin\n\nSets the element to 14px (in ems) based on the text size passed as @context.\n\n.u-small-text(@context)\n\n// Ex.\n.example {\n  font-size: unit(20px / @base-font-size-px, em);\n\n  small {\n    .u-small-text(20px);\n  }\n}\n\n// Compiles to\n.example {\n  font-size: 1.25em;\n}\n\n.example small {\n  font-size: 0.7em;\n}\n\n",
                     'variation_code_snippet6': ``,
                 
             
@@ -3204,37 +3202,37 @@ The text will be styled the same as H5 heading text.
                 
                     'variation_name1': 'Block helper text',
                     'variation_description1': "Block helper text appears directly beneath a form label. Use it to explain why a piece of information is being requested, address security and privacy concerns, or to suggest ways of providing answers other than providing formatting examples.\n",
-                    'variation_code_snippet1': `&lt;label class=&quot;a-label a-label__heading&quot;&gt;
+                    'variation_code_snippet1': `&lt;label class=&quot;a-label a-label__heading&quot; for=&quot;helper-block-example&quot;&gt;
 Label
     &lt;small class=&quot;a-label_helper a-label_helper__block&quot;&gt;Use block helper text for instructions&lt;/small&gt;
 &lt;/label&gt;
 
-&lt;input class=&quot;a-text-input&quot; type=&quot;text&quot; id=&quot;helper-example&quot;&gt;`,
+&lt;input class=&quot;a-text-input&quot; type=&quot;text&quot; id=&quot;helper-block-example&quot;&gt;`,
                 
                     'variation_name2': 'Inline helper text',
                     'variation_description2': "Inline helper text appears directly after a form label. Use it to indicate whether a field is optional. See the behavior section for more information.\n",
-                    'variation_code_snippet2': `&lt;label class=&quot;a-label a-label__heading&quot;&gt;
+                    'variation_code_snippet2': `&lt;label class=&quot;a-label a-label__heading&quot; for=&quot;helper-inline-example&quot;&gt;
  Label &lt;small class=&quot;a-label_helper&quot;&gt;(optional)&lt;/small&gt;
 &lt;/label&gt;
 
-&lt;input class=&quot;a-text-input&quot; type=&quot;text&quot; id=&quot;helper-example&quot;&gt;`,
+&lt;input class=&quot;a-text-input&quot; type=&quot;text&quot; id=&quot;helper-inline-example&quot;&gt;`,
                 
                     'variation_name3': 'Placeholder text',
                     'variation_description3': "Placeholder text appears within a text input field, and disappears once a user begins typing in that field. Use it for formatting examples only.\n",
-                    'variation_code_snippet3': `&lt;label class=&quot;a-label a-label__heading&quot; for=&quot;textinput-example-default&quot;&gt;
+                    'variation_code_snippet3': `&lt;label class=&quot;a-label a-label__heading&quot; for=&quot;textinput-example-birthdate-default&quot;&gt;
     Birth date
 &lt;/label&gt;
 &lt;input class=&quot;a-text-input&quot;
       type=&quot;text&quot;
-      id=&quot;textinput-example-default&quot;
+      id=&quot;textinput-example-birthdate-default&quot;
       placeholder=&quot;mm/dd/yyyy&quot;&gt;
 &lt;br&gt;&lt;br&gt;
-&lt;label class=&quot;a-label a-label__heading&quot; for=&quot;textinput-example-default&quot;&gt;
+&lt;label class=&quot;a-label a-label__heading&quot; for=&quot;textinput-example-email-default&quot;&gt;
     Email address
 &lt;/label&gt;
 &lt;input class=&quot;a-text-input&quot;
       type=&quot;text&quot;
-      id=&quot;textinput-example-default&quot;
+      id=&quot;textinput-example-email-default&quot;
       placeholder=&quot;email@example.com&quot;&gt;
 `,
                 
@@ -3467,7 +3465,7 @@ Label
 
 
             'title': 'Welcome to the CFPB Design System',
-            'description': "\n\n  The Design System is an open-source resource for teams at the Consumer Financial Protection Bureau (CFPB). It’s intended to help teams produce consistent, effective, and accessible products for the American public.\n\n\n\n\n\n  \n\n\n\nStart with our principles\n\n\n\n  Our general principles form the strategic underpinnings for the CFPB’s design and development standards. Our accessibility principles lay the foundation for ensuring that our web content is available for all users.\n\n\n\n\n\nBrowse the Design System\n\n\n\n  Foundation\n  This section includes our visual identity standards, such as color, grid, and typography. It forms the foundation for the CFPB’s website and external-facing materials. \n\nBrowse foundation\n\n\n\n\n  Components\n  Components contain the key building blocks of the design system that, when combined, can be used to create a website. Examples of components include buttons, text inputs, tables, and alerts. \n\nBrowse components\n\n\n\n\n  Patterns\n  Patterns are combinations of components used in conjunction to achieve a goal. Interaction patterns are best practice design solutions to common user tasks. Layout patterns are used by designers to organize content into clear, accessible web pages. \n\nBrowse patterns\n\n\n\n\n  Pages\n  Find out more about the common page types that we use within our content management system, which are documented for easy reference. \n\nBrowse pages\n\n\n\n\n  Development\n  The development section includes utilities, such as variables, helper classes, and mixins, and layout options, such as blocks. \n\nBrowse development\n\n\n\n\n  Guidelines\n  This section includes guidelines for creating specific product experiences not covered in other sections. \n\nBrowse guidelines\n\n\n\n\nGet started as a developer\n\n\n\n  Setup and contribution\n  Learn how to integrate our design system into your project, contribute to the code base, and update the documentation. \n\nGet started\n\n\n\n\n  Using source code\n\n  The Design System also includes the source code for the common components that power the design of consumerfinance.gov. \n\nView source code on github.\n\n\n\n\nContribute to the Design System\n\n\n\n  We strongly encourage you to participate in the growth and maintenance of the Design System. To make contribution easier, the Design System is built on a tool called Netlify CMS, which allows for editing of pages in a web browser, without needing to use git or other command-line tools. \n\nView instructions for contributing to the Design System.\n\n\n\n\n\n\n\n\n\n  About the CFPB Design System\n\n  Our design system has been created to work with a wide range of devices and browsers. Following a modern, mobile first responsive approach, sites built with our Design System easily adapt to a wide range of screen sizes, all while carefully following accessibility best practices.\nAs a work of the United States government, all code is open source and in the public domain. We encourage you to use this framework in your own projects and to contribute back.\n\n  License\n\n  All content has been released as open source under the CC0 1.0 Universal Public Domain Dedication, and we’d love for other agencies, developers, or groups to adapt it for their own use.\n\n\n",
+            'description': "\n\n  The Design System is an open-source resource for teams at the Consumer Financial Protection Bureau (CFPB). It's intended to help teams produce consistent, effective, and accessible products for the American public.\n\n\n\n\n\n  \n\n\n\nGetting started\n\nOur general principles form the strategic underpinnings for the CFPB’s design and development standards. Our accessibility principles lay the foundation for ensuring that our web content is available for all users.\n\n\n\nBrowse the Design System\n\n\n\n  Foundation\n  This section includes our visual identity standards, such as color, grid, and typography. It forms the foundation for the CFPB’s website and external-facing materials. \n\nBrowse foundation\n\n\n\n\n  Components\n  Components contain the key building blocks of the design system that, when combined, can be used to create a website. Examples of components include buttons, text inputs, tables, and alerts. \n\nBrowse components\n\n\n\n\n  Patterns\n  Patterns are combinations of components used in conjunction to achieve a goal. Interaction patterns are best practice design solutions to common user tasks. Layout patterns are used by designers to organize content into clear, accessible web pages. \n\nBrowse patterns\n\n\n\n\n  Pages\n  Find out more about the common page types that we use within our content management system, which are documented for easy reference. \n\nBrowse pages\n\n\n\n\n  Development\n  The development section includes utilities, such as variables, helper classes, and mixins, and layout options, such as blocks. \n\nBrowse development\n\n\n\n\n  Guidelines\n  This section includes guidelines for creating specific product experiences not covered in other sections. \n\nBrowse guidelines\n\n\n\n\nGet started as a developer\n\n\n\n  Setup and contribution\n  Learn how to integrate our design system into your project, contribute to the code base, and update the documentation. \n\nGet started\n\n\n\n\n  Using source code\n\n  The Design System also includes the source code for the common components that power the design of consumerfinance.gov. \n\nView source code on github.\n\n\n\n\nContribute to the Design System\n\nWe strongly encourage you to participate in the growth and maintenance of the Design System. To make contribution easier, the Design System is built on a tool called Netlify CMS, which allows for editing of pages in a web browser, without needing to use git or other command-line tools. \n\nView instructions for contributing to the Design System.\n\n\n\n\n\nAbout the CFPB Design System\n\nOur design system has been created to work with a wide range of devices and browsers. Following a modern, mobile first responsive approach, sites built with our Design System easily adapt to a wide range of screen sizes, all while carefully following accessibility best practices.\nAs a work of the United States government, all code is open source and in the public domain. We encourage you to use this framework in your own projects and to contribute back.\n\nLicense\n\nAll content has been released as open source under the CC0 1.0 Universal Public Domain Dedication, and we’d love for other agencies, developers, or groups to adapt it for their own use.\n",
             'use_cases': "\n",
             'guidelines': "\n",
             'behavior': "\n",
@@ -3666,7 +3664,7 @@ Label
             'title': 'Info unit groups',
             'description': "Info unit groups are generally used to provide brief context as they lead users from a parent page (landing pages, sublanding pages, and browse pages) to additional content on a child or sibling page. There are two types: image and text, or text only.\n",
             'use_cases': "\n",
-            'guidelines': "Content guidelines\n\n  \n    Headings\n\n    \n      25/75 image and text component: 60 characters or less, ideally rendering as one line.\n      50/50 image and text component: 30 characters or less, ideally rendering as one line.\n      50/50 and 33/33/33 text components: 45 characters max. 25 characters max is preferred, which renders as one line at max column width.\n    \n  \n  \n    Descriptions\n\n    \n      Do not use info unit groups for multiple paragraphs of copy. Copy should be succinct.\n      50/50 text components: 100-250 characters max\n      33/33/33 text components: 90-150 characters max\n      25/75 image and text component: 275 characters max\n      50/50 image and text component: 50 characters min, 130 characters max, which renders as 2-3 lines at max column width.\n    \n  \n  \n    Call to action\n\n    \n      25/75 image and text component: 65 characters max\n      50/50 image and text component: 40 characters max\n      50/50 text components: 40 characters max\n      33/33/33 text components: 30 characters max\n      Follow link guidelines.\n    \n  \n  \n    When these components are featured together (which is ideal), the amount of content in each component should be as close to the same number of total lines as possible.\n\n    \n      For 50/50 text components, one or two lines different is ok\n      For 33/33/33 text components, a difference of one line is ok\n    \n  \n\n",
+            'guidelines': "Content guidelines\n\nHeadings\n\n\n  25/75 image and text component: 60 characters or less, ideally rendering as one line.\n  50/50 image and text component: 30 characters or less, ideally rendering as one line.\n  50/50 and 33/33/33 text components: 45 characters max. 25 characters max is preferred, which renders as one line at max column width.\n\n\nDescriptions\n\n\n  Do not use info unit groups for multiple paragraphs of copy. Copy should be succinct.\n  50/50 text components: 100-250 characters max\n  33/33/33 text components: 90-150 characters max\n  25/75 image and text component: 275 characters max\n  50/50 image and text component: 50 characters min, 130 characters max, which renders as 2-3 lines at max column width.\n  \n    When these components are featured together (which is ideal), the amount of content in each component should be as close to the same number of total lines as possible.\n\n    \n      For 50/50 text components, one or two lines different is ok\n      For 33/33/33 text components, a difference of one line is ok\n    \n  \n\n\nCall to action\n\n\n  25/75 image and text component: 65 characters max\n  50/50 image and text component: 40 characters max\n  50/50 text components: 40 characters max\n  33/33/33 text components: 30 characters max\n  Follow link guidelines.\n\n",
             'behavior': "50/50 components\n\nBoth the image and text and text-only components behave similarly. The text-only component is shown here.\n\n\n  \n    \n      Above 600 px\n      Below 601 px\n    \n  \n  \n    \n      \n      \n    \n  \n\n\n33/33/33 text component\n\n\n  \n    \n      Above 600 px\n      Below 601 px\n    \n  \n  \n    \n      \n      \n    \n  \n\n\n25/75 image and text component\n\nAt breakpoints below 601, side-by-side modules stack vertically in Z-order as shown below, and the mobile link style is used for the call to action link(s)\n\n\n",
             'accessibility': "\n",
             'research': "\n",
@@ -3782,11 +3780,11 @@ Label
                 
                     'variation_name1': 'Label heading',
                     'variation_description1': "\n",
-                    'variation_code_snippet1': `&lt;label class=&quot;a-label a-label__heading&quot;&gt;
+                    'variation_code_snippet1': `&lt;label class=&quot;a-label a-label__heading&quot; for=&quot;label-heading-example&quot;&gt;
 Label heading
 &lt;/label&gt;
 
-&lt;input class=&quot;a-text-input&quot; type=&quot;text&quot;&gt;`,
+&lt;input class=&quot;a-text-input&quot; type=&quot;text&quot; id=&quot;label-heading-example&quot;&gt;`,
                 
                     'variation_name2': 'Inline label',
                     'variation_description2': "\n",
@@ -3852,7 +3850,7 @@ Label heading
             'behavior': "Below the 901 pixel breakpoint, the entire sidebar stacks below the main content area, appearing near the bottom of the page for mobile and tablet users.\n\n\n  \n    \n      Above 900 px\n      Below 901 px\n    \n  \n  \n    \n      \n      \n    \n  \n\n",
             'accessibility': "\n",
             'research': "\n",
-            'related_items': "Page introductions\n\n  Heroes\n  Text introduction\n\n\nContent\n\n  Image and text components\n  Wells\n  Text components\n  Email signup form\n\n",
+            'related_items': "Page introductions\n\n\n  Heroes\n  Text introduction\n\n\nContent\n\n\n  Image and text components\n  Wells\n  Text components\n  Email signup form\n\n",
             'url': 'pages/landing-pages'
         }
         ,
@@ -3883,7 +3881,7 @@ Label heading
             'behavior': "Below the 901 pixel breakpoint, the sidebar stacks below the main content area.\n\n\n  \n    \n      Above 900 px\n      Below 901 px\n    \n  \n  \n    \n      \n      \n    \n  \n\n",
             'accessibility': "\n",
             'research': "\n",
-            'related_items': "Pages\n\n  Document detail pages\n\n\nPage introductions\n\n  Text introduction\n  Item introduction\n\n\nContent\n\n  Tables\n  Expandables\n  25/75 image &amp; text component\n  Wells\n  Email signup form\n\n",
+            'related_items': "Pages\n\n\n  Document detail pages\n\n\nPage introductions\n\n\n  Text introduction\n  Item introduction\n\n\nContent\n\n\n  Tables\n  Expandables\n  25/75 image &amp; text component\n  Wells\n  Email signup form\n\n",
             'url': 'pages/learn-pages'
         }
         ,
@@ -5510,7 +5508,7 @@ ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;`,
             'behavior': "Below the 901 pixel breakpoint, the sidebar stacks below the main content area.\n\n\n  \n    \n      Above 900 px\n      Below 901 px\n    \n  \n  \n    \n      \n      \n    \n  \n\n",
             'accessibility': "\n",
             'research': "\n",
-            'related_items': "Page introductions\n\n  Heroes\n  Text introduction (with optional breakout sidebar)\n\n\nContent\n\n  Info unit groups\n  Featured content module\n  Wells\n  Email signup form\n\n",
+            'related_items': "Page introductions\n\n\n  Heroes\n  Text introduction (with optional breakout sidebar)\n\n\nContent\n\n\n  Info unit groups\n  Featured content module\n  Wells\n  Email signup form\n\n",
             'url': 'pages/sublanding-pages'
         }
         ,

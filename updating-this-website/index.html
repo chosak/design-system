@@ -455,7 +455,7 @@ image upload in CMS"></p>
 
         <div class="o-editor_link" id="edit-page">
             <a class="a-btn" href="/design-system/updating-this-website?page=Updating+this+website" title="Edit this page in Netlify CMS">
-                <span class="a-btn_text">Edit this page</span>
+                <span class="a-btn_text">Edit page</span>
                 <span class="a-btn_icon"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 833.4 1200" class="cf-icon-svg"><path d="M233 203.1c-27.2-27.2-71.8-27.2-99 0L20.4 316.7c-27.2 27.2-27.2 71.8 0 99l89.7 89.7 212.7-212.7-89.8-89.6zM832.6 992.7l-48.6-216c-3.4-15.3-14.9-36.5-26-48.6l-1.8-1.8-121.8-121.9-110.6-110.6-165.7-165.7-54.8 54.8 400 400 21.4-21.4c5.3 6.4 11.9 18.9 13.5 25.6l21.4 95.2-60 60-95.2-21.4c-6.7-1.5-19.2-8.2-25.6-13.5l89.2-89.2-400-400-122.6 122.6 165.7 165.7 110.6 110.6 121.8 121.8 1.8 1.8c12.1 11.1 33.3 22.6 48.6 26l215.9 48.6c2.2.5 4.3.7 6.2.7 12.6.1 19.8-9.4 16.6-23.3z"></path></svg></span>
             </a>
         </div>
@@ -464,20 +464,21 @@ image upload in CMS"></p>
 </main>
 
 
+  
   <footer class="ds-footer" role="contentinfo">
 
     <hr>
 
-    
     <div class="block block__sub">
         <p>
             <small>
-                Help improve this website by
-                <a href="https://github.com/cfpb/design-system/issues/new?assignees=&amp;labels=content%2C+help+wanted&amp;template=component-needs-content-edits.md&amp;title=Suggestions+for%3A+%22Updating%20this%20website%22">filing an issue</a>
-                on GitHub,
-                <a href="/design-system/updating-this-website/#editing-pages">editing a page</a>
-                or
-                <a href="/design-system/updating-this-website/#creating-new-pages">creating a new page</a>.
+                We need your help keeping the Design System accurate and up-to-date!
+                If you see something wrong or missing,
+                <a href="/design-system/updating-this-website/#editing-pages">edit the page</a>.
+                If you can’t make those changes yourself,
+                <a href="https://github.com/cfpb/design-system/issues/new?assignees=&amp;labels=content%2C+help+wanted&amp;template=component-needs-content-edits.md&amp;title=Suggestions+for%3A+%22Updating%20this%20website%22">file an issue</a>.
+                If you have a substantial change to an existing page, or a new standard you want to add to the Design System,
+                <a href="/design-system/updating-this-website/#creating-new-pages">follow these guidelines</a>.
             </small>
         </p>
 
@@ -496,10 +497,10 @@ image upload in CMS"></p>
             </small>
         </p>
     </div>
-    
 
 </footer>
 
+  
   <script src="/design-system/dist/js/main.js" charset="utf-8"></script>
 
   
@@ -510,12 +511,12 @@ image upload in CMS"></p>
         PAGES_ALLOWED['Banners'] = '/design-system/admin/#/collections/pages/entries/banners';
         PAGES_ALLOWED['Bar charts'] = '/design-system/admin/#/collections/pages/entries/bar-charts';
         PAGES_ALLOWED['Base images'] = '/design-system/admin/#/collections/pages/entries/base-images';
+        PAGES_ALLOWED['Beam pattern'] = '/design-system/admin/#/collections/pages/entries/beam-pattern';
         PAGES_ALLOWED['Blocks'] = '/design-system/admin/#/collections/pages/entries/blocks';
         PAGES_ALLOWED['Browse pages'] = '/design-system/admin/#/collections/pages/entries/browse-pages';
         PAGES_ALLOWED['Buttons'] = '/design-system/admin/#/collections/pages/entries/buttons';
         PAGES_ALLOWED['Cards'] = '/design-system/admin/#/collections/pages/entries/cards';
         PAGES_ALLOWED['Checkboxes'] = '/design-system/admin/#/collections/pages/entries/checkboxes';
-        PAGES_ALLOWED['Code blocks'] = '/design-system/admin/#/collections/pages/entries/code-blocks';
         PAGES_ALLOWED['Color'] = '/design-system/admin/#/collections/pages/entries/color';
         PAGES_ALLOWED['Column dividers'] = '/design-system/admin/#/collections/pages/entries/column-dividers';
         PAGES_ALLOWED['Components'] = '/design-system/admin/#/collections/pages/entries/components';
@@ -545,7 +546,6 @@ image upload in CMS"></p>
         PAGES_ALLOWED['Welcome to the CFPB Design System'] = '/design-system/admin/#/collections/special-pages/entries/home';
         PAGES_ALLOWED['Iconography'] = '/design-system/admin/#/collections/pages/entries/iconography';
         PAGES_ALLOWED['Illustration'] = '/design-system/admin/#/collections/pages/entries/illustration';
-        PAGES_ALLOWED['Info Unit Groups: Image and text'] = '/design-system/admin/#/collections/pages/entries/info-unit-groups-image-text';
         PAGES_ALLOWED['Info unit groups'] = '/design-system/admin/#/collections/pages/entries/info-unit-groups-link-blobs';
         PAGES_ALLOWED['Integrating the Design System into your project'] = '/design-system/admin/#/collections/pages/entries/integrating-the-design-system-into-your-project';
         PAGES_ALLOWED['Text introductions'] = '/design-system/admin/#/collections/pages/entries/introductions';
@@ -568,14 +568,12 @@ image upload in CMS"></p>
         PAGES_ALLOWED['Patterns'] = '/design-system/admin/#/collections/pages/entries/patterns';
         PAGES_ALLOWED['Photography'] = '/design-system/admin/#/collections/pages/entries/photography';
         PAGES_ALLOWED['Pie charts'] = '/design-system/admin/#/collections/pages/entries/pie-charts';
-        PAGES_ALLOWED['Quotes'] = '/design-system/admin/#/collections/pages/entries/quotes';
         PAGES_ALLOWED['Radio buttons'] = '/design-system/admin/#/collections/pages/entries/radio-buttons';
         PAGES_ALLOWED['Range sliders'] = '/design-system/admin/#/collections/pages/entries/range-sliders';
         PAGES_ALLOWED['Sample component page'] = '/design-system/admin/#/collections/pages/entries/sample-component-page';
         PAGES_ALLOWED['Seal'] = '/design-system/admin/#/collections/pages/entries/seal';
         PAGES_ALLOWED['Search'] = '/design-system/admin/#/collections/pages/entries/search-results.html';
         PAGES_ALLOWED['Main content and sidebars'] = '/design-system/admin/#/collections/pages/entries/sidebars-prefooters';
-        PAGES_ALLOWED['Snippet Lists'] = '/design-system/admin/#/collections/pages/entries/snippet-lists';
         PAGES_ALLOWED['Sublanding pages'] = '/design-system/admin/#/collections/pages/entries/sublanding-pages';
         PAGES_ALLOWED['Tables'] = '/design-system/admin/#/collections/pages/entries/tables';
         PAGES_ALLOWED['Templates'] = '/design-system/admin/#/collections/pages/entries/templates';

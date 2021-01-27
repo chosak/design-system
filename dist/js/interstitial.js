@@ -1,10 +1,7 @@
-/******/ (() => { // webpackBootstrap
-/************************************************************************/
+/******/ (function() { // webpackBootstrap
 /*!****************************************!*\
   !*** ./docs/assets/js/interstitial.js ***!
   \****************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements:  */
 /**
  * @param {String} name - The key of the URL query parameter to retrieve
  * @returns {String} - Value of URL query parameter

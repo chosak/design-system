@@ -139,10 +139,6 @@
                                 <a class="m-list_link" href="/design-system/patterns/e-mail-signup-forms">E-mail signup forms</a>
                             </li>
                         
-                            <li class="m-list_item">
-                                <a class="m-list_link" href="/design-system/patterns/feedback-forms">Feedback forms</a>
-                            </li>
-                        
                         </ul>
                     </div>
                     
@@ -156,6 +152,17 @@
                         
                             <li class="m-list_item">
                                 <a class="m-list_link" href="/design-system/patterns/pagination">Pagination</a>
+                            </li>
+                        
+                        </ul>
+                    </div>
+                    
+                    <div class="ds-nav ds-nav-3">
+                        <div class="h6">Transitions</div>
+                        <ul class="m-list m-list__links">
+                        
+                            <li class="m-list_item">
+                                <a class="m-list_link" href="/design-system/patterns/transition-patterns">Transition patterns</a>
                             </li>
                         
                         </ul>
@@ -320,7 +327,7 @@
 
         
         <div class="o-variation_group_description">
-            <p>Pagination consists of “Older” and “Newer” links, styled as buttons, and an inline form (input, submit button) that allows users to navigate to specific pages by number. When appropriate, the buttons may be labeled “Previous” and “Next”.</p>
+            <p>Pagination consists of buttons to navigate through content, along with an inline form (input field, submit button) to enable users to navigate to specific pages by number.</p>
 
         </div>
         
@@ -328,6 +335,7 @@
         
         <div class="m-variation">
 
+            
             
             
             
@@ -516,6 +524,7 @@
             
             
             
+            
 
             
             <div class="m-variation_name">
@@ -642,7 +651,11 @@
                 <div class="content_line content_line__wide u-mb20"></div>
                 <p>
                 </p>
-<p>Tables with over 20 rows can be paired with pagination.</p>
+<ul>
+  <li>Display 25 results per page.</li>
+  <li>If content is sorted by date, label the navigation buttons “Older” and “Newer”; otherwise, label the buttons “Previous” and “Next”.</li>
+  <li>Tables with over 20 rows can be paired with pagination.</li>
+</ul>
 
                 
             
@@ -652,8 +665,22 @@
                 <div class="content_line content_line__wide u-mb20"></div>
                 <p>
                 </p>
-<p><code class="language-plaintext highlighter-rouge">@bp-xs-max</code>: On small screens, the buttons display next to each other, stacked on top of the form</p>
+<p>On small screens, the buttons display next to each other, stacked on top of the form (<code class="language-plaintext highlighter-rouge">@bp-xs-max</code>).</p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Above 600 px</th>
+      <th>Below 601 px</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/design-system/images/uploads/screen-shot-2021-01-22-at-5.02.03-pm.png" alt="Pagination at breakpoints above 600 px"></td>
+      <td><img src="/design-system/images/uploads/screen-shot-2021-01-22-at-5.02.30-pm.png" alt="Pagination at breakpoints below 601 px"></td>
+    </tr>
+  </tbody>
+</table>
 
                 
             
@@ -735,9 +762,9 @@
                 
                 
                 
-                <a href="https://github.com/cfpb/design-system/commits/master/docs/pages/pagination.md">
-                    <time datetime="2020-07-28 10:49:17 -0400">
-                        10:49:17 AM Jul 28, 2020
+                <a href="https://github.com/cfpb/design-system/commits/main/docs/pages/pagination.md">
+                    <time datetime="2021-01-25 14:26:49 -0500">
+                         2:26:49 PM Jan 25, 2021
                     </time>
                 </a>
             </small>

@@ -1,12 +1,10 @@
-/******/ (() => { // webpackBootstrap
+/******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./node_modules/anchor-js/anchor.js":
 /*!******************************************!*\
   !*** ./node_modules/anchor-js/anchor.js ***!
   \******************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: top-level-this-exports, __webpack_exports__, module */
 /***/ (function(module, exports) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* eslint-env amd */
@@ -35,15 +33,15 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
      * @param {Object} opts - Options object
      */
     function _applyRemainingDefaultOptions(opts) {
-      opts.icon = opts.hasOwnProperty('icon') ? opts.icon : '\ue9cb'; // Accepts characters (and also URLs?), like  '#', '¶', '❡', or '§'.
-      opts.visible = opts.hasOwnProperty('visible') ? opts.visible : 'hover'; // Also accepts 'always' & 'touch'
-      opts.placement = opts.hasOwnProperty('placement') ? opts.placement : 'right'; // Also accepts 'left'
-      opts.ariaLabel = opts.hasOwnProperty('ariaLabel') ? opts.ariaLabel : 'Anchor'; // Accepts any text.
-      opts.class = opts.hasOwnProperty('class') ? opts.class : ''; // Accepts any class name.
-      opts.base = opts.hasOwnProperty('base') ? opts.base : ''; // Accepts any base URI.
+      opts.icon = Object.prototype.hasOwnProperty.call(opts, 'icon') ? opts.icon : '\ue9cb'; // Accepts characters (and also URLs?), like  '#', '¶', '❡', or '§'.
+      opts.visible = Object.prototype.hasOwnProperty.call(opts, 'visible') ? opts.visible : 'hover'; // Also accepts 'always' & 'touch'
+      opts.placement = Object.prototype.hasOwnProperty.call(opts, 'placement') ? opts.placement : 'right'; // Also accepts 'left'
+      opts.ariaLabel = Object.prototype.hasOwnProperty.call(opts, 'ariaLabel') ? opts.ariaLabel : 'Anchor'; // Accepts any text.
+      opts.class = Object.prototype.hasOwnProperty.call(opts, 'class') ? opts.class : ''; // Accepts any class name.
+      opts.base = Object.prototype.hasOwnProperty.call(opts, 'base') ? opts.base : ''; // Accepts any base URI.
       // Using Math.floor here will ensure the value is Number-cast and an integer.
-      opts.truncate = opts.hasOwnProperty('truncate') ? Math.floor(opts.truncate) : 64; // Accepts any value that can be typecast to a number.
-      opts.titleText = opts.hasOwnProperty('titleText') ? opts.titleText : ''; // Accepts any text.
+      opts.truncate = Object.prototype.hasOwnProperty.call(opts, 'truncate') ? Math.floor(opts.truncate) : 64; // Accepts any value that can be typecast to a number.
+      opts.titleText = Object.prototype.hasOwnProperty.call(opts, 'titleText') ? opts.titleText : ''; // Accepts any text.
     }
 
     _applyRemainingDefaultOptions(this.options);
@@ -54,7 +52,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
      * @return {Boolean} - true if the current device supports touch.
      */
     this.isTouchDevice = function() {
-      return !!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch);
+      return Boolean('ontouchstart' in window || window.TouchEvent || window.DocumentTouch && document instanceof DocumentTouch);
     };
 
     /**
@@ -104,7 +102,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
       // We produce a list of existing IDs so we don't generate a duplicate.
       elsWithIds = document.querySelectorAll('[id]');
-      idList = [].map.call(elsWithIds, function assign(el) {
+      idList = [].map.call(elsWithIds, function(el) {
         return el.id;
       });
 
@@ -133,6 +131,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             index = idList.indexOf(newTidyText);
             count += 1;
           } while (index !== -1);
+
           index = undefined;
           idList.push(newTidyText);
 
@@ -154,6 +153,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         if (this.options.titleText) {
           anchor.title = this.options.titleText;
         }
+
         // Adjust the href if there's a <base> tag. See https://github.com/bryanbraun/anchorjs/issues/98
         hrefBase = document.querySelector('base') ? window.location.pathname + window.location.search : '';
         hrefBase = this.options.base || hrefBase;
@@ -178,10 +178,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         if (this.options.placement === 'left') {
           anchor.style.position = 'absolute';
           anchor.style.marginLeft = '-1em';
-          anchor.style.paddingRight = '0.5em';
+          anchor.style.paddingRight = '.5em';
           elements[i].insertBefore(anchor, elements[i].firstChild);
         } else { // if the option provided is `right` (or anything else).
-          anchor.style.paddingLeft = '0.375em';
+          anchor.style.paddingLeft = '.375em';
           elements[i].appendChild(anchor);
         }
       }
@@ -189,6 +189,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       for (i = 0; i < indexesToDrop.length; i++) {
         elements.splice(indexesToDrop[i] - i, 1);
       }
+
       this.elements = this.elements.concat(elements);
 
       return this;
@@ -213,10 +214,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
           if (index !== -1) {
             this.elements.splice(index, 1);
           }
+
           // Remove the anchor from the DOM.
           elements[i].removeChild(domAnchor);
         }
       }
+
       return this;
     };
 
@@ -237,8 +240,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
      * @return {String}      - hyphen-delimited text for use in IDs and URLs.
      */
     this.urlify = function(text) {
-      // Regex for finding the non-safe URL characters (many need escaping): & +$,:;=?@"#{}|^~[`%!'<>]./()*\ (newlines, tabs, backspace, & vertical tabs)
-      var nonsafeChars = /[& +$,:;=?@"#{}|^~[`%!'<>\]\.\/\(\)\*\\\n\t\b\v]/g,
+      // Decode HTML characters such as '&nbsp;' first.
+      var textareaElement = document.createElement('textarea');
+      textareaElement.innerHTML = text;
+      text = textareaElement.value;
+
+      // Regex for finding the non-safe URL characters (many need escaping):
+      //   & +$,:;=?@"#{}|^~[`%!'<>]./()*\ (newlines, tabs, backspace, vertical tabs, and non-breaking space)
+      var nonsafeChars = /[& +$,:;=?@"#{}|^~[`%!'<>\]./()*\\\n\t\b\v\u00A0]/g,
           urlText;
 
       // The reason we include this _applyRemainingDefaultOptions is so urlify can be called independently,
@@ -250,7 +259,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       // Note: we trim hyphens after truncating because truncating can cause dangling hyphens.
       // Example string:                      // " ⚡⚡ Don't forget: URL fragments should be i18n-friendly, hyphenated, short, and clean."
       urlText = text.trim()                   // "⚡⚡ Don't forget: URL fragments should be i18n-friendly, hyphenated, short, and clean."
-        .replace(/\'/gi, '')                  // "⚡⚡ Dont forget: URL fragments should be i18n-friendly, hyphenated, short, and clean."
+        .replace(/'/gi, '')                   // "⚡⚡ Dont forget: URL fragments should be i18n-friendly, hyphenated, short, and clean."
         .replace(nonsafeChars, '-')           // "⚡⚡-Dont-forget--URL-fragments-should-be-i18n-friendly--hyphenated--short--and-clean-"
         .replace(/-{2,}/g, '-')               // "⚡⚡-Dont-forget-URL-fragments-should-be-i18n-friendly-hyphenated-short-and-clean-"
         .substring(0, this.options.truncate)  // "⚡⚡-Dont-forget-URL-fragments-should-be-i18n-friendly-hyphenated-"
@@ -267,8 +276,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
      * @return   {Boolean}     true/false
      */
     this.hasAnchorJSLink = function(el) {
-      var hasLeftAnchor = el.firstChild && ((' ' + el.firstChild.className + ' ').indexOf(' anchorjs-link ') > -1),
-          hasRightAnchor = el.lastChild && ((' ' + el.lastChild.className + ' ').indexOf(' anchorjs-link ') > -1);
+      var hasLeftAnchor = el.firstChild && (' ' + el.firstChild.className + ' ').indexOf(' anchorjs-link ') > -1,
+          hasRightAnchor = el.lastChild && (' ' + el.lastChild.className + ' ').indexOf(' anchorjs-link ') > -1;
 
       return hasLeftAnchor || hasRightAnchor || false;
     };
@@ -289,8 +298,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       } else if (Array.isArray(input) || input instanceof NodeList) {
         elements = [].slice.call(input);
       } else {
-        throw new Error('The selector provided to AnchorJS was invalid.');
+        throw new TypeError('The selector provided to AnchorJS was invalid.');
       }
+
       return elements;
     }
 
@@ -306,26 +316,26 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
       var style = document.createElement('style'),
           linkRule =
-          ' .anchorjs-link {'                       +
-          '   opacity: 0;'                          +
-          '   text-decoration: none;'               +
-          '   -webkit-font-smoothing: antialiased;' +
-          '   -moz-osx-font-smoothing: grayscale;'  +
-          ' }',
+          '.anchorjs-link{'                        +
+            'opacity:0;'                           +
+            'text-decoration:none;'                +
+            '-webkit-font-smoothing:antialiased;'  +
+            '-moz-osx-font-smoothing:grayscale'    +
+          '}',
           hoverRule =
-          ' *:hover > .anchorjs-link,'              +
-          ' .anchorjs-link:focus  {'                +
-          '   opacity: 1;'                          +
-          ' }',
+          ':hover>.anchorjs-link,'                 +
+          '.anchorjs-link:focus{'                  +
+            'opacity:1'                            +
+          '}',
           anchorjsLinkFontFace =
-          ' @font-face {'                           +
-          '   font-family: "anchorjs-icons";'       + // Icon from icomoon; 10px wide & 10px tall; 2 empty below & 4 above
-          '   src: url(data:n/a;base64,AAEAAAALAIAAAwAwT1MvMg8yG2cAAAE4AAAAYGNtYXDp3gC3AAABpAAAAExnYXNwAAAAEAAAA9wAAAAIZ2x5ZlQCcfwAAAH4AAABCGhlYWQHFvHyAAAAvAAAADZoaGVhBnACFwAAAPQAAAAkaG10eASAADEAAAGYAAAADGxvY2EACACEAAAB8AAAAAhtYXhwAAYAVwAAARgAAAAgbmFtZQGOH9cAAAMAAAAAunBvc3QAAwAAAAADvAAAACAAAQAAAAEAAHzE2p9fDzz1AAkEAAAAAADRecUWAAAAANQA6R8AAAAAAoACwAAAAAgAAgAAAAAAAAABAAADwP/AAAACgAAA/9MCrQABAAAAAAAAAAAAAAAAAAAAAwABAAAAAwBVAAIAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAMCQAGQAAUAAAKZAswAAACPApkCzAAAAesAMwEJAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAQAAg//0DwP/AAEADwABAAAAAAQAAAAAAAAAAAAAAIAAAAAAAAAIAAAACgAAxAAAAAwAAAAMAAAAcAAEAAwAAABwAAwABAAAAHAAEADAAAAAIAAgAAgAAACDpy//9//8AAAAg6cv//f///+EWNwADAAEAAAAAAAAAAAAAAAAACACEAAEAAAAAAAAAAAAAAAAxAAACAAQARAKAAsAAKwBUAAABIiYnJjQ3NzY2MzIWFxYUBwcGIicmNDc3NjQnJiYjIgYHBwYUFxYUBwYGIwciJicmNDc3NjIXFhQHBwYUFxYWMzI2Nzc2NCcmNDc2MhcWFAcHBgYjARQGDAUtLXoWOR8fORYtLTgKGwoKCjgaGg0gEhIgDXoaGgkJBQwHdR85Fi0tOAobCgoKOBoaDSASEiANehoaCQkKGwotLXoWOR8BMwUFLYEuehYXFxYugC44CQkKGwo4GkoaDQ0NDXoaShoKGwoFBe8XFi6ALjgJCQobCjgaShoNDQ0NehpKGgobCgoKLYEuehYXAAAADACWAAEAAAAAAAEACAAAAAEAAAAAAAIAAwAIAAEAAAAAAAMACAAAAAEAAAAAAAQACAAAAAEAAAAAAAUAAQALAAEAAAAAAAYACAAAAAMAAQQJAAEAEAAMAAMAAQQJAAIABgAcAAMAAQQJAAMAEAAMAAMAAQQJAAQAEAAMAAMAAQQJAAUAAgAiAAMAAQQJAAYAEAAMYW5jaG9yanM0MDBAAGEAbgBjAGgAbwByAGoAcwA0ADAAMABAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAH//wAP) format("truetype");' +
-          ' }',
+          '@font-face{'                            +
+            'font-family:anchorjs-icons;'          + // Icon from icomoon; 10px wide & 10px tall; 2 empty below & 4 above
+            'src:url(data:n/a;base64,AAEAAAALAIAAAwAwT1MvMg8yG2cAAAE4AAAAYGNtYXDp3gC3AAABpAAAAExnYXNwAAAAEAAAA9wAAAAIZ2x5ZlQCcfwAAAH4AAABCGhlYWQHFvHyAAAAvAAAADZoaGVhBnACFwAAAPQAAAAkaG10eASAADEAAAGYAAAADGxvY2EACACEAAAB8AAAAAhtYXhwAAYAVwAAARgAAAAgbmFtZQGOH9cAAAMAAAAAunBvc3QAAwAAAAADvAAAACAAAQAAAAEAAHzE2p9fDzz1AAkEAAAAAADRecUWAAAAANQA6R8AAAAAAoACwAAAAAgAAgAAAAAAAAABAAADwP/AAAACgAAA/9MCrQABAAAAAAAAAAAAAAAAAAAAAwABAAAAAwBVAAIAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAMCQAGQAAUAAAKZAswAAACPApkCzAAAAesAMwEJAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAQAAg//0DwP/AAEADwABAAAAAAQAAAAAAAAAAAAAAIAAAAAAAAAIAAAACgAAxAAAAAwAAAAMAAAAcAAEAAwAAABwAAwABAAAAHAAEADAAAAAIAAgAAgAAACDpy//9//8AAAAg6cv//f///+EWNwADAAEAAAAAAAAAAAAAAAAACACEAAEAAAAAAAAAAAAAAAAxAAACAAQARAKAAsAAKwBUAAABIiYnJjQ3NzY2MzIWFxYUBwcGIicmNDc3NjQnJiYjIgYHBwYUFxYUBwYGIwciJicmNDc3NjIXFhQHBwYUFxYWMzI2Nzc2NCcmNDc2MhcWFAcHBgYjARQGDAUtLXoWOR8fORYtLTgKGwoKCjgaGg0gEhIgDXoaGgkJBQwHdR85Fi0tOAobCgoKOBoaDSASEiANehoaCQkKGwotLXoWOR8BMwUFLYEuehYXFxYugC44CQkKGwo4GkoaDQ0NDXoaShoKGwoFBe8XFi6ALjgJCQobCjgaShoNDQ0NehpKGgobCgoKLYEuehYXAAAADACWAAEAAAAAAAEACAAAAAEAAAAAAAIAAwAIAAEAAAAAAAMACAAAAAEAAAAAAAQACAAAAAEAAAAAAAUAAQALAAEAAAAAAAYACAAAAAMAAQQJAAEAEAAMAAMAAQQJAAIABgAcAAMAAQQJAAMAEAAMAAMAAQQJAAQAEAAMAAMAAQQJAAUAAgAiAAMAAQQJAAYAEAAMYW5jaG9yanM0MDBAAGEAbgBjAGgAbwByAGoAcwA0ADAAMABAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAH//wAP) format("truetype")' +
+          '}',
           pseudoElContent =
-          ' [data-anchorjs-icon]::after {'          +
-          '   content: attr(data-anchorjs-icon);'   +
-          ' }',
+          '[data-anchorjs-icon]::after{'           +
+            'content:attr(data-anchorjs-icon)'     +
+          '}',
           firstStyleEl;
 
       style.className = 'anchorjs';
@@ -334,7 +344,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       // We place it in the head with the other style tags, if possible, so as to
       // not look out of place. We insert before the others so these styles can be
       // overridden if necessary.
-      firstStyleEl = document.head.querySelector('[rel="stylesheet"], style');
+      firstStyleEl = document.head.querySelector('[rel="stylesheet"],style');
       if (firstStyleEl === undefined) {
         document.head.appendChild(style);
       } else {
@@ -358,10 +368,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /*!********************************!*\
   !*** ./docs/assets/js/main.js ***!
   \********************************/
-/*! namespace exports */
-/*! exports [not provided] [no usage info] */
-/*! runtime requirements: __webpack_require__, __webpack_require__.n, __webpack_require__.r, __webpack_exports__, __webpack_require__.* */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -369,13 +376,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var anchor_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! anchor-js */ "./node_modules/anchor-js/anchor.js");
 /* harmony import */ var anchor_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(anchor_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _cfpb_cfpb_expandables_src_Expandable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @cfpb/cfpb-expandables/src/Expandable */ "./packages/cfpb-expandables/src/Expandable.js");
-/* harmony import */ var _cfpb_cfpb_expandables_src_Expandable__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_cfpb_cfpb_expandables_src_Expandable__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _cfpb_cfpb_tables_src_Table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @cfpb/cfpb-tables/src/Table */ "./packages/cfpb-tables/src/Table.js");
-/* harmony import */ var _cfpb_cfpb_tables_src_Table__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_cfpb_cfpb_tables_src_Table__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var govuk_frontend__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! govuk-frontend */ "./node_modules/govuk-frontend/govuk/all.js");
-/* harmony import */ var govuk_frontend__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(govuk_frontend__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _redirect_banner_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./redirect-banner.js */ "./docs/assets/js/redirect-banner.js");
-/* harmony import */ var _sidebar_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./sidebar.js */ "./docs/assets/js/sidebar.js");
+/* harmony import */ var _cfpb_cfpb_forms_src_organisms_Multiselect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @cfpb/cfpb-forms/src/organisms/Multiselect */ "./packages/cfpb-forms/src/organisms/Multiselect.js");
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_utilities_transition_AlphaTransition_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/utilities/transition/AlphaTransition.js */ "./packages/cfpb-atomic-component/src/utilities/transition/AlphaTransition.js");
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_utilities_transition_MoveTransition_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/utilities/transition/MoveTransition.js */ "./packages/cfpb-atomic-component/src/utilities/transition/MoveTransition.js");
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_utilities_transition_MaxHeightTransition_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/utilities/transition/MaxHeightTransition.js */ "./packages/cfpb-atomic-component/src/utilities/transition/MaxHeightTransition.js");
+/* harmony import */ var _cfpb_cfpb_tables_src_Table__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @cfpb/cfpb-tables/src/Table */ "./packages/cfpb-tables/src/Table.js");
+/* harmony import */ var govuk_frontend__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! govuk-frontend */ "./node_modules/govuk-frontend/govuk/all.js");
+/* harmony import */ var govuk_frontend__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(govuk_frontend__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _redirect_banner_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./redirect-banner.js */ "./docs/assets/js/redirect-banner.js");
+/* harmony import */ var _sidebar_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./sidebar.js */ "./docs/assets/js/sidebar.js");
 
 
 
@@ -383,15 +392,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_redirect_banner_js__WEBPACK_IMPORTED_MODULE_5__.default.init();
-_sidebar_js__WEBPACK_IMPORTED_MODULE_6__.default.init();
+
+
+
+
+_redirect_banner_js__WEBPACK_IMPORTED_MODULE_9__.default.init();
+_sidebar_js__WEBPACK_IMPORTED_MODULE_10__.default.init();
 var anchors = new (anchor_js__WEBPACK_IMPORTED_MODULE_1___default())(); // Add anchors to all headings (except page title headings)
 
 anchors.add('h2:not(.title), h3, h4, h5'); // Ensure there are no anchors in inconvenient places
 
 anchors.remove("\n  .live-code-example h2,\n  .live-code-example h3,\n  .live-code-example h4,\n  .live-code-example h5,\n  .o-expandable_label,\n  #search-results h3\n");
-_cfpb_cfpb_expandables_src_Expandable__WEBPACK_IMPORTED_MODULE_2___default().init();
-_cfpb_cfpb_tables_src_Table__WEBPACK_IMPORTED_MODULE_3___default().init();
+var multiselectDom = document.querySelector('.o-multiselect');
+
+if (multiselectDom) {
+  var multiselect = new _cfpb_cfpb_forms_src_organisms_Multiselect__WEBPACK_IMPORTED_MODULE_3__.default(multiselectDom);
+  multiselect.init();
+}
+
+_cfpb_cfpb_expandables_src_Expandable__WEBPACK_IMPORTED_MODULE_2__.default.init();
+_cfpb_cfpb_tables_src_Table__WEBPACK_IMPORTED_MODULE_7__.default.init(); // Exporting these classes to the window so that the transition-patterns.md
+// page can use them in its code snippets.
+
+window.AlphaTransition = _cfpb_cfpb_atomic_component_src_utilities_transition_AlphaTransition_js__WEBPACK_IMPORTED_MODULE_4__.default;
+window.MoveTransition = _cfpb_cfpb_atomic_component_src_utilities_transition_MoveTransition_js__WEBPACK_IMPORTED_MODULE_5__.default;
+window.MaxHeightTransition = _cfpb_cfpb_atomic_component_src_utilities_transition_MaxHeightTransition_js__WEBPACK_IMPORTED_MODULE_6__.default;
 var main = document.querySelector('#main');
 var tabs = document.querySelectorAll('[data-module="tabs"]');
 
@@ -400,7 +425,7 @@ if (tabs && tabs.length > 0) {
 
   for (var i = 0; i < tabs.length; i++) {
     var tab = tabs[i];
-    new govuk_frontend__WEBPACK_IMPORTED_MODULE_4__.Tabs(tab).init();
+    new govuk_frontend__WEBPACK_IMPORTED_MODULE_8__.Tabs(tab).init();
   }
 }
 
@@ -443,17 +468,10 @@ function handleToggleClick(event) {
 /*!*******************************************!*\
   !*** ./docs/assets/js/redirect-banner.js ***!
   \*******************************************/
-/*! namespace exports */
-/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
-/*! other exports [not provided] [no usage info] */
-/*! runtime requirements: __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
 /**
  * Retrieve redirect source name and URL.
  * @param {Array} match - Matched URL UTM source.
@@ -517,7 +535,7 @@ function init() {
   }
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+/* harmony default export */ __webpack_exports__["default"] = ({
   init: init
 });
 
@@ -527,17 +545,10 @@ function init() {
 /*!***********************************!*\
   !*** ./docs/assets/js/sidebar.js ***!
   \***********************************/
-/*! namespace exports */
-/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
-/*! other exports [not provided] [no usage info] */
-/*! runtime requirements: __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
 /**
  * Initialize the side navigation script to handle opening the sidebar
  * when the page is resized between mobile and desktop sizes.
@@ -580,7 +591,7 @@ function init() {
   });
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+/* harmony default export */ __webpack_exports__["default"] = ({
   init: init
 });
 
@@ -590,20 +601,14 @@ function init() {
 /*!******************************************!*\
   !*** ./docs/assets/js/toggle-details.js ***!
   \******************************************/
-/*! namespace exports */
-/*! export TOGGLE_ATTRIBUTE [provided] [no usage info] [missing usage info prevents renaming] */
-/*! export toggleAllDetails [provided] [no usage info] [missing usage info prevents renaming] */
-/*! export toggleDetails [provided] [no usage info] [missing usage info prevents renaming] */
-/*! other exports [not provided] [no usage info] */
-/*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TOGGLE_ATTRIBUTE": () => /* binding */ TOGGLE_ATTRIBUTE,
-/* harmony export */   "toggleDetails": () => /* binding */ toggleDetails,
-/* harmony export */   "toggleAllDetails": () => /* binding */ toggleAllDetails
+/* harmony export */   "TOGGLE_ATTRIBUTE": function() { return /* binding */ TOGGLE_ATTRIBUTE; },
+/* harmony export */   "toggleDetails": function() { return /* binding */ toggleDetails; },
+/* harmony export */   "toggleAllDetails": function() { return /* binding */ toggleAllDetails; }
 /* harmony export */ });
 var HIDDEN_CLASS = 'u-hidden';
 var TOGGLE_ATTRIBUTE = 'data-toggle-details';
@@ -681,8 +686,6 @@ function toggleAllDetails(toggleBtn) {
 /*!**************************************************!*\
   !*** ./node_modules/govuk-frontend/govuk/all.js ***!
   \**************************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: __webpack_exports__, top-level-this-exports, __webpack_require__.g, __webpack_require__.* */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 (function (global, factory) {
@@ -2645,57 +2648,103 @@ ErrorSummary.prototype.getAssociatedLegendOrLabel = function ($input) {
     $input.closest('label')
 };
 
-function Header ($module) {
+function NotificationBanner ($module) {
   this.$module = $module;
 }
 
-Header.prototype.init = function () {
-  // Check for module
+/**
+ * Initialise the component
+ */
+NotificationBanner.prototype.init = function () {
   var $module = this.$module;
+  // Check for module
   if (!$module) {
     return
   }
 
-  // Check for button
-  var $toggleButton = $module.querySelector('.govuk-js-header-toggle');
-  if (!$toggleButton) {
+  this.setFocus();
+};
+
+/**
+ * Focus the element
+ *
+ * If `role="alert"` is set, focus the element to help some assistive technologies
+ * prioritise announcing it.
+ *
+ * You can turn off the auto-focus functionality by setting `data-disable-auto-focus="true"` in the
+ * component HTML. You might wish to do this based on user research findings, or to avoid a clash
+ * with another element which should be focused when the page loads.
+ */
+NotificationBanner.prototype.setFocus = function () {
+  var $module = this.$module;
+
+  if ($module.getAttribute('data-disable-auto-focus') === 'true') {
     return
   }
 
-  // Handle $toggleButton click events
-  $toggleButton.addEventListener('click', this.handleClick.bind(this));
+  if ($module.getAttribute('role') !== 'alert') {
+    return
+  }
+
+  // Set tabindex to -1 to make the element focusable with JavaScript.
+  // Remove the tabindex on blur as the component doesn't need to be focusable after the page has
+  // loaded.
+  if (!$module.getAttribute('tabindex')) {
+    $module.setAttribute('tabindex', '-1');
+
+    $module.addEventListener('blur', function () {
+      $module.removeAttribute('tabindex');
+    });
+  }
+
+  $module.focus();
+};
+
+function Header ($module) {
+  this.$module = $module;
+  this.$menuButton = $module && $module.querySelector('.govuk-js-header-toggle');
+  this.$menu = this.$menuButton && $module.querySelector(
+    '#' + this.$menuButton.getAttribute('aria-controls')
+  );
+}
+
+/**
+ * Initialise header
+ *
+ * Check for the presence of the header, menu and menu button – if any are
+ * missing then there's nothing to do so return early.
+ */
+Header.prototype.init = function () {
+  if (!this.$module || !this.$menuButton || !this.$menu) {
+    return
+  }
+
+  this.syncState(this.$menu.classList.contains('govuk-header__navigation--open'));
+  this.$menuButton.addEventListener('click', this.handleMenuButtonClick.bind(this));
 };
 
 /**
-* Toggle class
-* @param {object} node element
-* @param {string} className to toggle
-*/
-Header.prototype.toggleClass = function (node, className) {
-  if (node.className.indexOf(className) > 0) {
-    node.className = node.className.replace(' ' + className, '');
-  } else {
-    node.className += ' ' + className;
-  }
+ * Sync menu state
+ *
+ * Sync the menu button class and the accessible state of the menu and the menu
+ * button with the visible state of the menu
+ *
+ * @param {boolean} isVisible Whether the menu is currently visible
+ */
+Header.prototype.syncState = function (isVisible) {
+  this.$menuButton.classList.toggle('govuk-header__menu-button--open', isVisible);
+  this.$menuButton.setAttribute('aria-expanded', isVisible);
 };
 
 /**
-* An event handler for click event on $toggleButton
-* @param {object} event event
-*/
-Header.prototype.handleClick = function (event) {
-  var $module = this.$module;
-  var $toggleButton = event.target || event.srcElement;
-  var $target = $module.querySelector('#' + $toggleButton.getAttribute('aria-controls'));
-
-  // If a button with aria-controls, handle click
-  if ($toggleButton && $target) {
-    this.toggleClass($target, 'govuk-header__navigation--open');
-    this.toggleClass($toggleButton, 'govuk-header__menu-button--open');
-
-    $toggleButton.setAttribute('aria-expanded', $toggleButton.getAttribute('aria-expanded') !== 'true');
-    $target.setAttribute('aria-hidden', $target.getAttribute('aria-hidden') === 'false');
-  }
+ * Handle menu button click
+ *
+ * When the menu button is clicked, change the visibility of the menu and then
+ * sync the accessibility state and menu button state
+ */
+Header.prototype.handleMenuButtonClick = function () {
+  var isVisible = this.$menu.classList.toggle('govuk-header__navigation--open');
+  this.syncState(isVisible);
 };
 
 function Radios ($module) {
@@ -3168,6 +3217,11 @@ function initAll (options) {
   var $toggleButton = scope.querySelector('[data-module="govuk-header"]');
   new Header($toggleButton).init();
 
+  var $notificationBanners = scope.querySelectorAll('[data-module="govuk-notification-banner"]');
+  nodeListForEach($notificationBanners, function ($notificationBanner) {
+    new NotificationBanner($notificationBanner).init();
+  });
+
   var $radios = scope.querySelectorAll('[data-module="govuk-radios"]');
   nodeListForEach($radios, function ($radio) {
     new Radios($radio).init();
@@ -3199,11 +3253,22 @@ exports.Tabs = Tabs;
 /*!***********************************!*\
   !*** ./docs/assets/css/main.less ***!
   \***********************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements:  */
-/***/ (() => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./packages/cfpb-icons/src/icons/close.svg":
+/*!*************************************************!*\
+  !*** ./packages/cfpb-icons/src/icons/close.svg ***!
+  \*************************************************/
+/***/ (function(module) {
+
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 718.9 1200\" class=\"cf-icon-svg\"><path d=\"M451.4 613.7l248.1-248.1c25.6-25.1 26-66.3.8-91.9s-66.3-26-91.9-.8l-.8.8-248.1 248.1-248.1-248.1c-25.4-25.4-66.5-25.4-91.9 0s-25.4 66.5 0 91.9l248.1 248.1L19.5 861.8c-25.6 25.1-26 66.3-.8 91.9s66.3 26 91.9.8l.8-.8 248.1-248.1 248.1 248.1c25.4 25.4 66.5 25.4 91.9 0s25.4-66.5 0-91.9L451.4 613.7z\"></path></svg>"
 
 /***/ }),
 
@@ -3211,9 +3276,7 @@ exports.Tabs = Tabs;
 /*!***********************************************************************************!*\
   !*** ./packages/cfpb-atomic-component/node_modules/ftdomdelegate/lib/delegate.js ***!
   \***********************************************************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: module */
-/***/ ((module) => {
+/***/ (function(module) {
 
 "use strict";
 /*jshint browser:true, node:true*/
@@ -3702,9 +3765,7 @@ Delegate.prototype.destroy = function() {
 /*!********************************************************************************!*\
   !*** ./packages/cfpb-atomic-component/node_modules/ftdomdelegate/lib/index.js ***!
   \********************************************************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: module, __webpack_require__ */
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 "use strict";
 /*jshint browser:true, node:true*/
@@ -3733,10 +3794,14 @@ module.exports.Delegate = Delegate;
 /*!**************************************************************************!*\
   !*** ./packages/cfpb-atomic-component/src/components/AtomicComponent.js ***!
   \**************************************************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: __webpack_require__, module */
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _utilities_atomic_helpers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utilities/atomic-helpers.js */ "./packages/cfpb-atomic-component/src/utilities/atomic-helpers.js");
+/* harmony import */ var _utilities_object_assign_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utilities/object-assign.js */ "./packages/cfpb-atomic-component/src/utilities/object-assign.js");
+/* harmony import */ var _mixins_EventObserver_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../mixins/EventObserver.js */ "./packages/cfpb-atomic-component/src/mixins/EventObserver.js");
+/* harmony import */ var _utilities_type_checkers_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utilities/type-checkers.js */ "./packages/cfpb-atomic-component/src/utilities/type-checkers.js");
 /* ==========================================================================
    AtomicComponent
 
@@ -3745,15 +3810,17 @@ module.exports.Delegate = Delegate;
    Contains code copied from the following with major modifications :
 
    - Backbone.js ( http://backbonejs.org/docs/backbone.html ).
-   - Marionette ( http://marionettejs.com/ ).
+   - Marionette ( http://marionettejs.com ).
 
    ========================================================================== */
 
-const assign = __webpack_require__(/*! ../utilities/object-assign */ "./packages/cfpb-atomic-component/src/utilities/object-assign/index.js").assign;
-const Delegate = __webpack_require__(/*! ftdomdelegate */ "./packages/cfpb-atomic-component/node_modules/ftdomdelegate/lib/index.js").Delegate;
-const Events = __webpack_require__( /*! ../mixins/Events */ "./packages/cfpb-atomic-component/src/mixins/Events.js" );
-const isFunction = __webpack_require__(/*! ../utilities/type-checkers */ "./packages/cfpb-atomic-component/src/utilities/type-checkers/index.js").isFunction;
 
+
+const Delegate = __webpack_require__(/*! ftdomdelegate */ "./packages/cfpb-atomic-component/node_modules/ftdomdelegate/lib/index.js").Delegate;
+
+
+
+const TAG_NAME = 'div';
 
 /**
  * Function as the constrcutor for the AtomicComponent.
@@ -3767,21 +3834,30 @@ function AtomicComponent( element, attributes ) {
   this.element = element;
   this.initializers = [];
   this.uId = this.uniqueId( 'ac' );
-  assign( this, attributes );
+  (0,_utilities_object_assign_js__WEBPACK_IMPORTED_MODULE_1__.assign)( this, attributes );
   this.processModifiers();
   this.ensureElement();
   this.setCachedElements();
   this.initializers.push( this.initialize );
-  this.initializers.forEach( function( func ) {
-    if ( isFunction( func ) ) func.apply( this, arguments );
-  }, this );
-  this.trigger( 'component:initialized' );
 }
 
 // Public instance Methods and properties.
-assign( AtomicComponent.prototype, Events, {
+(0,_utilities_object_assign_js__WEBPACK_IMPORTED_MODULE_1__.assign)( AtomicComponent.prototype, new _mixins_EventObserver_js__WEBPACK_IMPORTED_MODULE_2__.default(), {
 
-  tagName: 'div',
+  /**
+   * Run through and call the component's initializers.
+   * @returns {AtomicComponent} An instance.
+   */
+  init: function() {
+    this.initializers.forEach( function( func ) {
+      if ( _utilities_type_checkers_js__WEBPACK_IMPORTED_MODULE_3__.default.isFunction( func ) ) {
+        func.apply( this, arguments );
+      }
+    }, this );
+    this.dispatchEvent( 'component:initialized' );
+
+    return this;
+  },
 
   /**
    * Function used to process class modifiers. These should
@@ -3802,7 +3878,7 @@ assign( AtomicComponent.prototype, Events, {
           this.initializers.push( modifier.initialize );
           delete modifier.initialize;
         }
-        assign( this, modifier );
+        (0,_utilities_object_assign_js__WEBPACK_IMPORTED_MODULE_1__.assign)( this, modifier );
       }
     }, this );
   },
@@ -3821,15 +3897,15 @@ assign( AtomicComponent.prototype, Events, {
    */
   ensureElement: function() {
     if ( !this.element ) { // eslint-disable-line no-negated-condition
-      const attrs = assign( {}, this.attributes );
+      const attrs = (0,_utilities_object_assign_js__WEBPACK_IMPORTED_MODULE_1__.assign)( {}, this.attributes );
       attrs.id = this.id || this.u_id;
       if ( this.className ) attrs.class = this.className;
-      this.setElement( document.createElement( this.tagName ) );
+      this.setElement( document.createElement( TAG_NAME ) );
       this.setElementAttributes( attrs );
     } else {
       this.setElement( this.element );
     }
-    this.element.setAttribute( 'data-bound', true );
+    (0,_utilities_atomic_helpers_js__WEBPACK_IMPORTED_MODULE_0__.setInitFlag)( this.element );
   },
 
   /**
@@ -3856,7 +3932,7 @@ assign( AtomicComponent.prototype, Events, {
    * @returns {Object} Hash of event names and cached elements.
    */
   setCachedElements: function() {
-    const ui = assign( {}, this.ui );
+    const ui = (0,_utilities_object_assign_js__WEBPACK_IMPORTED_MODULE_1__.assign)( {}, this.ui );
     let key;
     let element;
 
@@ -3891,7 +3967,7 @@ assign( AtomicComponent.prototype, Events, {
       delete this.element;
     }
     this.undelegateEvents();
-    this.trigger( 'component:destroyed' );
+    this.dispatchEvent( 'component:destroyed' );
 
     return true;
   },
@@ -3927,20 +4003,25 @@ assign( AtomicComponent.prototype, Events, {
     let match;
 
     events = events || ( events = this.events );
-    if ( !events ) return this;
+    if ( !events ) {
+      return this;
+    }
+
     this.undelegateEvents();
     this._delegate = new Delegate( this.element );
     for ( key in events ) {
       if ( {}.hasOwnProperty.call( events, key ) ) {
         method = events[key];
-        if ( isFunction( this[method] ) ) method = this[method];
+        if ( _utilities_type_checkers_js__WEBPACK_IMPORTED_MODULE_3__.default.isFunction( this[method] ) ) {
+          method = this[method];
+        }
         if ( method ) {
           match = key.match( delegateEventSplitter );
           this.delegate( match[1], match[2], method.bind( this ) );
         }
       }
     }
-    this.trigger( 'component:bound' );
+    this.dispatchEvent( 'component:bound' );
 
     return this;
   },
@@ -3969,7 +4050,7 @@ assign( AtomicComponent.prototype, Events, {
     if ( this._delegate ) {
       this._delegate.destroy();
     }
-    this.element.removeAttribute( 'data-bound' );
+    this.element.removeAttribute( 'data-js-hook' );
 
     return this;
   },
@@ -3988,7 +4069,6 @@ assign( AtomicComponent.prototype, Events, {
 
 // Static Methods
 
-
 /**
  * Function used to set the attributes on an element.
  * and unbind events.
@@ -3996,21 +4076,20 @@ assign( AtomicComponent.prototype, Events, {
  * @param {Object} attributes - Hash of attributes to set on base element.
  * @returns {Function} Extended child constructor function.
  */
-AtomicComponent.extend = function( attributes ) {
+function extend( attributes ) {
 
   /**
- * Function used as constructor in order to establish inheritance
- * chain.
- * @returns {AtomicComponent} An instance.
- */
+   * Function used as constructor in order to establish inheritance chain.
+   * @returns {AtomicComponent} An instance.
+   */
   function child() {
     this._super = AtomicComponent.prototype;
     return AtomicComponent.apply( this, arguments );
   }
 
   child.prototype = Object.create( AtomicComponent.prototype );
-  assign( child.prototype, attributes );
-  assign( child, AtomicComponent );
+  (0,_utilities_object_assign_js__WEBPACK_IMPORTED_MODULE_1__.assign)( child.prototype, attributes );
+  (0,_utilities_object_assign_js__WEBPACK_IMPORTED_MODULE_1__.assign)( child, AtomicComponent );
 
   if ( attributes.hasOwnProperty( 'ui' ) &&
        attributes.ui.hasOwnProperty( 'base' ) ) {
@@ -4020,265 +4099,502 @@ AtomicComponent.extend = function( attributes ) {
   child.constants = {};
 
   return child;
-};
-
+}
 
 /**
  * Function used to instantiate all instances of the particular
  * atomic component on a page.
- * @param {HTMLNode} scope - Where to search for components within.
  *
+ * @param {HTMLNode} scope - Where to search for components within.
  * @returns {Array} List of AtomicComponent instances.
  */
-AtomicComponent.init = function( scope ) {
-  const base = scope || document;
-  const elements = base.querySelectorAll( this.selector );
-  const components = [];
-  let element;
+function init( scope ) {
+  const components = (0,_utilities_atomic_helpers_js__WEBPACK_IMPORTED_MODULE_0__.instantiateAll)( this.selector, this, scope );
+  return components;
+}
 
-  for ( let i = 0, len = elements.length; i < len; i++ ) {
-    element = elements[i];
-    if ( element.hasAttribute( 'data-bound' ) === false ) {
-      components.push( new this( element ) );
+// Set public static methods.
+AtomicComponent.init = init;
+AtomicComponent.extend = extend;
+
+/* harmony default export */ __webpack_exports__["default"] = (AtomicComponent);
+
+
+/***/ }),
+
+/***/ "./packages/cfpb-atomic-component/src/mixins/EventObserver.js":
+/*!********************************************************************!*\
+  !*** ./packages/cfpb-atomic-component/src/mixins/EventObserver.js ***!
+  \********************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * EventObserver
+ * @class
+ *
+ * @classdesc Used for creating an object
+ *   that can be used to dispatch and listen to custom events.
+ * @returns {Object} An EventObserver instance.
+ */
+function EventObserver() {
+
+  // The events registered on this instance.
+  const _events = {};
+
+  /**
+   * Register an event listener.
+   * @param {string} event - The event name to listen for.
+   * @param {Function} callback - The function called when the event has fired.
+   * @returns {Object} The instance this EventObserver instance is decorating.
+   */
+  function addEventListener( event, callback ) {
+    if ( _events.hasOwnProperty( event ) ) {
+      _events[event].push( callback );
+    } else {
+      _events[event] = [ callback ];
     }
+
+    return this;
   }
 
-  return components;
-};
-
-module.exports = AtomicComponent;
-
-
-/***/ }),
-
-/***/ "./packages/cfpb-atomic-component/src/components/Organism.js":
-/*!*******************************************************************!*\
-  !*** ./packages/cfpb-atomic-component/src/components/Organism.js ***!
-  \*******************************************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: __webpack_require__, module */
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-/* ==========================================================================
-   Organism
-
-   Organism Atomic Component
-
-   ========================================================================== */
-
-const AtomicComponent = __webpack_require__( /*! ./AtomicComponent */ "./packages/cfpb-atomic-component/src/components/AtomicComponent.js" );
-const TYPES = __webpack_require__(/*! ../utilities/config */ "./packages/cfpb-atomic-component/src/utilities/config.js").TYPES;
-
-const Organism = AtomicComponent.extend( {
-  TYPE: TYPES.ORGANISM,
-  CHILD_TYPES: [ TYPES.MOLECULE, TYPES.ATOM ]
-} );
-
-module.exports = Organism;
-
-
-/***/ }),
-
-/***/ "./packages/cfpb-atomic-component/src/mixins/Events.js":
-/*!*************************************************************!*\
-  !*** ./packages/cfpb-atomic-component/src/mixins/Events.js ***!
-  \*************************************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: module */
-/***/ ((module) => {
-
-/* ==========================================================================
-   Events
-
-   Mixin to add basic event callback functionality.
-   ========================================================================== */
-
-const Events = {
-
   /**
-   * Function used to add events to an event stack.
-   *
-   * @param {string} eventName -
-   *   The name of the event to add to the event stack.
-   * @param {Function} callback - Function to call when event is triggered.
-   * @returns {Object} An instance.
+   * Remove an added event listener.
+   * Must match a call made to addEventListener.
+   * @param {string} event - The event name to remove.
+   * @param {Function} callback - The function attached to the event.
+   * @returns {Object} The instance this EventObserver instance is decorating.
    */
-  on: function( eventName, callback ) {
-    const events = this.events = this.events || {};
-    events[eventName] = this.events[eventName] || [];
-    events[eventName].push( callback );
-
-    return this;
-  },
-
-  /**
-   * Function used to remove events from an event stack.
-   *
-   * @param {string} eventName -
-   *   The name of the event to remove from the event stack.
-   * @returns {Object} An instance.
-   */
-  off: function( eventName ) {
-    if ( this.events && this.events[eventName] ) delete this.events[eventName];
-
-    return this;
-  },
-
-  /**
-   * Function used to trigger events that exist on the event stack.
-   *
-   * @param {string} eventName - The name of the event to trigger.
-   * @returns {Object} An instance.
-   */
-  trigger: function( eventName ) {
-    const events = this.events || {};
-    if ( events.hasOwnProperty( eventName ) === false ) {
+  function removeEventListener( event, callback ) {
+    if ( !_events.hasOwnProperty( event ) ) {
       return this;
     }
-    for ( let i = 0, len = events[eventName].length; i < len; i++ ) {
-      this.events[eventName][i].apply( this, arguments );
+
+    const index = _events[event].indexOf( callback );
+    // Check if there are any callbacks associated with a particular event.
+    if ( index !== -1 ) {
+      _events[event].splice( index, 1 );
     }
 
     return this;
   }
-};
 
-module.exports = Events;
-
-
-/***/ }),
-
-/***/ "./packages/cfpb-atomic-component/src/utilities/config.js":
-/*!****************************************************************!*\
-  !*** ./packages/cfpb-atomic-component/src/utilities/config.js ***!
-  \****************************************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: module */
-/***/ ((module) => {
-
-/* ==========================================================================
-   Atomic configurations and constants
-
-   ========================================================================== */
-
-// Bit values intended to be used for bit inversion.
-const DIRECTIONS = {
-  UP:    0,
-  RIGHT: 1,
-  DOWN:  -1,
-  LEFT:  -2
-};
-
-// Atomic component types used for describing component hierarchy.
-const TYPES = {
-  PAGE:     1,
-  TEMPLATE: 2,
-  ORGANISM: 3,
-  MOLECULE: 4,
-  ATOM:     5
-};
-
-/*
-  Atomic Prefixes used for standardizing naming conventions
-  across HTML, CSS, and Javascript.
-*/
-const PREFIXES = {
-  PAGE:     'p-',
-  TEMPLATE: 't-',
-  ORGANISM: 'o-',
-  MOLECULE: 'm-',
-  ATOM:     'a-'
-};
-
-/* eslint-disable no-useless-return */
-/**
- * Function used as a non-operational method that
- * is intended to be overriden.
- *
- * @returns {undefined}.
- */
-function NO_OP_FUNCTION() { return; }
-/* eslint-enable no-useless-return */
-
-let UNDEFINED;
-
-module.exports = {
-  DIRECTIONS:     DIRECTIONS,
-  NO_OP_FUNCTION: NO_OP_FUNCTION,
-  PREFIXES:       PREFIXES,
-  TYPES:          TYPES,
-  UNDEFINED:      UNDEFINED
-};
-
-
-/***/ }),
-
-/***/ "./packages/cfpb-atomic-component/src/utilities/dom-closest/index.js":
-/*!***************************************************************************!*\
-  !*** ./packages/cfpb-atomic-component/src/utilities/dom-closest/index.js ***!
-  \***************************************************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: module */
-/***/ ((module) => {
-
-/* ==========================================================================
-   Dom closest
-
-   Utility for retrieving the closest DOM element that
-   matches a give selector.
-
-   ========================================================================== */
-
-// TODO Fix complexity issue
-/* eslint-disable complexity */
-/**
- * Get the nearest parent node of an elementent.
- *
- * @param {HTMLNode} element - A DOM elementent.
- * @param {string} selector - CSS selector.
- * @returns {HTMLNode} Nearest parent node that matches the selector.
- */
-function closest( element, selector ) {
-  if ( 'closest' in element ) {
-    return element.closest( selector );
-  }
-
-  const matchesSelector = element.matches ||
-                          element.webkitMatchesSelector ||
-                          element.mozMatchesSelector ||
-                          element.msMatchesSelector;
-  let match;
-
-  while ( element ) {
-    if ( matchesSelector.bind( element )( selector ) ) {
-      match = element;
-    } else {
-      element = element.parentElement;
+  /**
+   * Broadcast an event.
+   * @param {string} event - The type of event to broadcast.
+   * @param {Object} options - The event object to pass to the event handler.
+   * @returns {Object} The instance this EventObserver instance is decorating.
+   */
+  function dispatchEvent( event, options ) {
+    if ( !_events.hasOwnProperty( event ) ) {
+      return this;
     }
 
-    if ( match ) { return element; }
+    options = options || {};
+
+    const evts = _events[event];
+    for ( let i = 0, len = evts.length; i < len; i++ ) {
+      evts[i].call( this, options );
+    }
+
+    return this;
+  }
+
+  /**
+   * @returns {Object} Map of registered events.
+   */
+  function getRegisteredEvents() {
+    return _events;
+  }
+
+  this.addEventListener = addEventListener;
+  this.removeEventListener = removeEventListener;
+  this.dispatchEvent = dispatchEvent;
+  this.getRegisteredEvents = getRegisteredEvents;
+
+  return this;
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (EventObserver);
+
+
+/***/ }),
+
+/***/ "./packages/cfpb-atomic-component/src/utilities/atomic-helpers.js":
+/*!************************************************************************!*\
+  !*** ./packages/cfpb-atomic-component/src/utilities/atomic-helpers.js ***!
+  \************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "checkDom": function() { return /* binding */ checkDom; },
+/* harmony export */   "destroyInitFlag": function() { return /* binding */ destroyInitFlag; },
+/* harmony export */   "instantiateAll": function() { return /* binding */ instantiateAll; },
+/* harmony export */   "setInitFlag": function() { return /* binding */ setInitFlag; }
+/* harmony export */ });
+/* harmony import */ var _data_hook__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./data-hook */ "./packages/cfpb-atomic-component/src/utilities/data-hook.js");
+/* harmony import */ var _standard_type__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./standard-type */ "./packages/cfpb-atomic-component/src/utilities/standard-type.js");
+/* ==========================================================================
+   Atomic Helpers.
+   Utilities for helping validate atomic design element architecture.
+   In descending order of scope, atomic components are:
+   - Page
+   - Template
+   - Organism
+   - Molecule
+   - Atom
+   ========================================================================= */
+
+
+
+
+/**
+ * @constant
+ * @type {string}
+ * @description
+ * Flag that gets set on an atomic component after its .init()
+ * method has been called. This is used so that an atomic
+ * component won't get initialized a second time after it
+ * has already been initialized.
+ */
+const INIT_FLAG = _standard_type__WEBPACK_IMPORTED_MODULE_1__.STATE_PREFIX + 'atomic_init';
+
+/**
+ * Check that a particular element passed into the constructor of
+ * an atomic component exists and that the correct atomic class
+ * is present on the element.
+ * @param {HTMLNode} element
+ *   The DOM element within which to search for the atomic element class.
+ * @param {string} baseClass - The CSS class name for the atomic element.
+ * @returns {HTMLNode} The DOM element for the atomic element.
+ * @throws {Error} If DOM element passed into the atomic element is not valid.
+ */
+function checkDom( element, baseClass ) {
+  _verifyElementExists( element, baseClass );
+  const dom = _verifyClassExists( element, baseClass );
+
+  return dom;
+}
+
+/**
+ * @param {HTMLNode} element
+ *   The DOM element within which to search for the atomic element class.
+ * @param {string} baseClass - The CSS class name for the atomic element.
+ * @returns {HTMLNode} The DOM element for the atomic element.
+ * @throws {Error} If DOM element passed into the atomic element is not valid.
+ */
+function _verifyElementExists( element, baseClass ) {
+  if ( !element || !element.classList ) {
+    const msg = element + ' is not valid. ' +
+              'Check that element is a DOM node with class "' +
+              baseClass + '"';
+    throw new Error( msg );
+  }
+
+  return element;
+}
+
+/**
+ * @param {HTMLNode} element
+ *   The DOM element within which to search for the atomic element class.
+ * @param {string} baseClass The CSS class name for the atomic element.
+ * @returns {HTMLNode} The DOM element for the atomic element.
+ * @throws {Error} If baseClass was not found on the element.
+ */
+function _verifyClassExists( element, baseClass ) {
+  const dom = element.classList.contains( baseClass ) ?
+    element : element.querySelector( '.' + baseClass );
+  if ( !dom ) {
+    const msg = baseClass + ' not found on or in passed DOM node.';
+    throw new Error( msg );
+  }
+
+  return dom;
+}
+
+/**
+ * Set a flag on an atomic component when it is initialized.
+ * Use the returned boolean to handle cases where an atomic component
+ * is initializing when it has already been initialized elsewhere.
+ * @param {HTMLNode} element - The DOM element for the atomic component.
+ * @param {null} destroy - Pass in true to .
+ * @returns {boolean} True if the init data-js-* hook attribute was set,
+ *   false otherwise.
+ */
+function setInitFlag( element ) {
+  if ( (0,_data_hook__WEBPACK_IMPORTED_MODULE_0__.contains)( element, INIT_FLAG ) ) {
+    return false;
+  }
+
+  (0,_data_hook__WEBPACK_IMPORTED_MODULE_0__.add)( element, INIT_FLAG );
+
+  return true;
+}
+
+/**
+ * Remove the initialization flag on an atomic component.
+ * This might be used if the DOM of an atomic element is cloned.
+ * @param {HTMLNode} element - The DOM element for the atomic component.
+ * @returns {boolean} True if the init data-js-* hook attribute was destroyed,
+ *   otherwise false if it didn't exist.
+ */
+function destroyInitFlag( element ) {
+  if ( !(0,_data_hook__WEBPACK_IMPORTED_MODULE_0__.contains)( element, INIT_FLAG ) ) {
+    return false;
+  }
+
+  (0,_data_hook__WEBPACK_IMPORTED_MODULE_0__.remove)( element, INIT_FLAG );
+
+  return true;
+}
+
+/**
+ * @param {string} selector - Selector to search for in the document.
+ * @param {Function} Constructor - A constructor function.
+ * @param {HTMLNode} [scope] - A dom node in which to query the selector.
+ *   If not supplied, it defaults to the `document`.
+ * @returns {Array} List of instances that were instantiated.
+ */
+function instantiateAll( selector, Constructor, scope ) {
+  const base = scope || document;
+  const elements = base.querySelectorAll( selector );
+  const insts = [];
+  let inst;
+  let element;
+  for ( let i = 0, len = elements.length; i < len; i++ ) {
+    element = elements[i];
+    if ( (0,_data_hook__WEBPACK_IMPORTED_MODULE_0__.contains)( element, INIT_FLAG ) === false ) {
+      inst = new Constructor( element );
+      inst.init();
+      insts.push( inst );
+    }
+  }
+  return insts;
+}
+
+// Expose public methods.
+
+
+
+/***/ }),
+
+/***/ "./packages/cfpb-atomic-component/src/utilities/data-hook.js":
+/*!*******************************************************************!*\
+  !*** ./packages/cfpb-atomic-component/src/utilities/data-hook.js ***!
+  \*******************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "add": function() { return /* binding */ add; },
+/* harmony export */   "contains": function() { return /* binding */ contains; },
+/* harmony export */   "remove": function() { return /* binding */ remove; }
+/* harmony export */ });
+/* harmony import */ var _standard_type__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./standard-type */ "./packages/cfpb-atomic-component/src/utilities/standard-type.js");
+// Required modules.
+
+
+/**
+ * @param {HTMLNode} element - DOM element.
+ * @param {string} value
+ *   Value to add to the element's JS data-* hook.
+ * @returns {string} The value that was added.
+ * @throws {Error} If supplied value contains a space,
+ *   meaning it would be two values, which is likely a typo.
+ */
+function add( element, value ) {
+  if ( value.indexOf( ' ' ) !== -1 ) {
+    const msg = _standard_type__WEBPACK_IMPORTED_MODULE_0__.JS_HOOK + ' values cannot contain spaces!';
+    throw new Error( msg );
+  }
+
+  const values = element.getAttribute( _standard_type__WEBPACK_IMPORTED_MODULE_0__.JS_HOOK );
+  if ( values !== null ) {
+    value = values + ' ' + value;
+  }
+  element.setAttribute( _standard_type__WEBPACK_IMPORTED_MODULE_0__.JS_HOOK, value );
+
+  return value;
+}
+
+/**
+ * @param {HTMLNode} element - DOM element.
+ * @param {string} value
+ *   Value to remove from the JS data-* hook value.
+ * @returns {boolean} True if value was removed, false otherwise.
+ */
+function remove( element, value ) {
+  const values = element.getAttribute( _standard_type__WEBPACK_IMPORTED_MODULE_0__.JS_HOOK );
+  const index = values.indexOf( value );
+  const valuesList = values.split( ' ' );
+  if ( index > -1 ) {
+    valuesList.splice( index, 1 );
+    element.setAttribute( _standard_type__WEBPACK_IMPORTED_MODULE_0__.JS_HOOK, valuesList.join( ' ' ) );
+    return true;
+  }
+
+  return false;
+}
+
+/**
+ * @param {HTMLNode} element - DOM element.
+ * @param {string} value
+ *   Value to check as existing as a JS data-* hook value.
+ * @returns {boolean} True if the data-* hook value exists, false otherwise.
+ */
+function contains( element, value ) {
+  if ( !element ) { return false; }
+  let values = element.getAttribute( _standard_type__WEBPACK_IMPORTED_MODULE_0__.JS_HOOK );
+  // If JS data-* hook is not set return immediately.
+  if ( !values ) { return false; }
+  values = values.split( ' ' );
+
+  return values.indexOf( value ) > -1 ? true : false;
+}
+
+
+
+
+/***/ }),
+
+/***/ "./packages/cfpb-atomic-component/src/utilities/dom-traverse.js":
+/*!**********************************************************************!*\
+  !*** ./packages/cfpb-atomic-component/src/utilities/dom-traverse.js ***!
+  \**********************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "queryOne": function() { return /* binding */ queryOne; },
+/* harmony export */   "closest": function() { return /* binding */ closest; }
+/* harmony export */ });
+/* harmony import */ var _type_checkers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./type-checkers.js */ "./packages/cfpb-atomic-component/src/utilities/type-checkers.js");
+
+
+/**
+ * Queries for the first match unless an HTMLNode is passed
+ * @param   {(HTMLNode|string)} expr HTMLNode or string to query for
+ * @param   {Object}          con  The document location to query
+ * @returns {HTMLNode}             The elem
+ */
+function queryOne( expr, con ) {
+  return _type_checkers_js__WEBPACK_IMPORTED_MODULE_0__.default.isString( expr ) ?
+    ( con || document ).querySelector( expr ) :
+    expr || null;
+}
+
+/**
+ * Traverse the element and its parents (heading toward the document root)
+ * until a node is found that matches the provided selector string.
+ * Will return itself or the matching ancestor.
+ * If no such element exists, it returns null.
+ *
+ * @param {HTMLNode} elem - A DOM element.
+ * @param {string} selector - CSS selector.
+ * @returns {HTMLNode} Element or nearest parent node that matches the selector.
+ *   Or null, if nothing is found.
+ */
+function closest( elem, selector ) {
+  if ( 'closest' in elem ) {
+    return elem.closest( selector );
+  }
+
+  const matchesSelector = _getMatchesMethod( elem );
+
+  try {
+    let parent = elem;
+    let match;
+    while ( parent ) {
+      if ( matchesSelector.bind( parent )( selector ) ) {
+        match = parent;
+      } else {
+        parent = parent.parentNode;
+      }
+
+      if ( match ) {
+        return parent;
+      }
+    }
+  } catch ( err ) {
+    return null;
   }
 
   return null;
 }
-/* eslint-enable complexity */
 
-// Expose public methods.
-module.exports = {
-  closest: closest
-};
+/**
+ * Search for support of the matches() method by looking at
+ * browser prefixes.
+ * @param {HTMLNode} elem
+ *   The element to check for support of matches() method.
+ * @returns {Function} The appropriate matches() method of elem.
+ */
+function _getMatchesMethod( elem ) {
+
+  return elem.matches ||
+         elem.webkitMatchesSelector ||
+         elem.mozMatchesSelector ||
+         elem.msMatchesSelector;
+}
+
+
 
 
 /***/ }),
 
-/***/ "./packages/cfpb-atomic-component/src/utilities/object-assign/index.js":
-/*!*****************************************************************************!*\
-  !*** ./packages/cfpb-atomic-component/src/utilities/object-assign/index.js ***!
-  \*****************************************************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: module */
-/***/ ((module) => {
+/***/ "./packages/cfpb-atomic-component/src/utilities/media-helpers.js":
+/*!***********************************************************************!*\
+  !*** ./packages/cfpb-atomic-component/src/utilities/media-helpers.js ***!
+  \***********************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "isMobileUserAgent": function() { return /* binding */ isMobileUserAgent; }
+/* harmony export */ });
+/* ==========================================================================
+   Media Helpers.
+   Utilities for working with different screen sizes and operating systems.
+   ========================================================================= */
+
+/**
+ * Query the browser's user agent string to see if it's on a mobile OS.
+ * @returns {boolean} True if on a mobile user agent, false otherwise.
+ */
+function isMobileUserAgent() {
+  const regex = new RegExp(
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
+  );
+  if ( regex.test( navigator.userAgent ) ) {
+    return true;
+  }
+  return false;
+
+}
+
+// Expose public methods.
+
+
+
+/***/ }),
+
+/***/ "./packages/cfpb-atomic-component/src/utilities/object-assign.js":
+/*!***********************************************************************!*\
+  !*** ./packages/cfpb-atomic-component/src/utilities/object-assign.js ***!
+  \***********************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "assign": function() { return /* binding */ assign; }
+/* harmony export */ });
 /* ==========================================================================
    Assign
 
@@ -4329,7 +4645,195 @@ function assign( destination ) {
 /* eslint-enable complexity */
 
 // Expose public methods.
-module.exports = { assign: assign };
+
+
+
+/***/ }),
+
+/***/ "./packages/cfpb-atomic-component/src/utilities/standard-type.js":
+/*!***********************************************************************!*\
+  !*** ./packages/cfpb-atomic-component/src/utilities/standard-type.js ***!
+  \***********************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "BEHAVIOR_PREFIX": function() { return /* binding */ BEHAVIOR_PREFIX; },
+/* harmony export */   "JS_HOOK": function() { return /* binding */ JS_HOOK; },
+/* harmony export */   "noopFunct": function() { return /* binding */ noopFunct; },
+/* harmony export */   "STATE_PREFIX": function() { return /* binding */ STATE_PREFIX; },
+/* harmony export */   "DIRECTIONS": function() { return /* binding */ DIRECTIONS; }
+/* harmony export */ });
+/**
+ * @constant
+ * @type {string}
+ * @description
+ * Constant for the name of the data-* attribute set on
+ * HTML DOM elements for access by JavaScript.
+ */
+const JS_HOOK = 'data-js-hook';
+
+/**
+ * @constant
+ * @type {string}
+ * @description
+ * Flag prefix for settings that describe what JavaScript
+ * behaviors should be attached to a component.
+ * This would be set in the markup and initialized when
+ * the JavaScript loads.
+ *
+ * @example
+ * A component may flag that it has certain JavaScript behaviors attached,
+ * such as:
+ * `data-js-hook="behavior_flyout-menu behavior_clearable-input"`,
+ * which defines that two scripts (FlyoutMenu) and (ClearableInput)
+ * should access this DOM element and initialize its behaviors.
+ */
+const BEHAVIOR_PREFIX = 'behavior_';
+
+/**
+ * @constant
+ * @type {string}
+ * @description
+ * Flag prefix for settings related to changes in a components
+ * state set in the data-* JavaScript hook.
+ *
+ * @example
+ * A component may flag that it has been initialized by setting
+ * `data-js-hook="state_atomic_init"` after page load.
+ * Which specifies that the init method of a atomic constructor
+ * has been called, such as
+ * `var globalSearch = new GlobalSearch( 'm-global-search' ).init()`.
+ */
+const STATE_PREFIX = 'state_';
+
+/**
+ * Empty function that will do nothing.
+ * A usecase is when an object has empty functions used for callbacks,
+ * which are meant to be overridden with functionality, but if not,
+ * noopFunct will fire and do nothing instead.
+ *
+ * @example
+ * callback.onComplete = standardType.noopFunct;
+ */
+function noopFunct() {
+  // Placeholder function meant to be overridden.
+}
+
+// Bit values intended to be used for bit inversion.
+const DIRECTIONS = {
+  UP:    0,
+  RIGHT: 1,
+  DOWN:  -1,
+  LEFT:  -2
+};
+
+
+
+
+/***/ }),
+
+/***/ "./packages/cfpb-atomic-component/src/utilities/transition/AlphaTransition.js":
+/*!************************************************************************************!*\
+  !*** ./packages/cfpb-atomic-component/src/utilities/transition/AlphaTransition.js ***!
+  \************************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BaseTransition_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaseTransition.js */ "./packages/cfpb-atomic-component/src/utilities/transition/BaseTransition.js");
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_mixins_EventObserver_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/mixins/EventObserver.js */ "./packages/cfpb-atomic-component/src/mixins/EventObserver.js");
+// Required modules.
+
+
+
+// Exported constants.
+const CLASSES = {
+  CSS_PROPERTY: 'opacity',
+  BASE_CLASS:   'u-alpha-transition',
+  ALPHA_100:    'u-alpha-100',
+  ALPHA_0:      'u-alpha-0'
+};
+
+/**
+ * AlphaTransition
+ * @class
+ *
+ * @classdesc Initializes new AlphaTransition behavior.
+ *
+ * @param {HTMLNode} element
+ *   DOM element to apply opacity transition to.
+ * @returns {AlphaTransition} An instance.
+ */
+function AlphaTransition( element ) {
+
+  const _baseTransition = new _BaseTransition_js__WEBPACK_IMPORTED_MODULE_0__.default( element, CLASSES );
+
+  /**
+   * @returns {AlphaTransition} An instance.
+   */
+  function init() {
+    _baseTransition.init();
+    const _transitionCompleteBinded = _transitionComplete.bind( this );
+    _baseTransition.addEventListener(
+      _BaseTransition_js__WEBPACK_IMPORTED_MODULE_0__.default.END_EVENT,
+      _transitionCompleteBinded
+    );
+    return this;
+  }
+
+  /**
+   * Handle the end of a transition.
+   */
+  function _transitionComplete() {
+    this.dispatchEvent( _BaseTransition_js__WEBPACK_IMPORTED_MODULE_0__.default.END_EVENT, { target: this } );
+  }
+
+  /**
+   * Fade to 100% by applying a utility alpha class.
+   * @returns {AlphaTransition} An instance.
+   */
+  function fadeIn() {
+    _baseTransition.applyClass( CLASSES.ALPHA_100 );
+
+    return this;
+  }
+
+  /**
+   * Fade to nothing by applying a utility alpha class.
+   * @returns {AlphaTransition} An instance.
+   */
+  function fadeOut() {
+    _baseTransition.applyClass( CLASSES.ALPHA_0 );
+
+    return this;
+  }
+
+  // Attach public events.
+  const eventObserver = new _cfpb_cfpb_atomic_component_src_mixins_EventObserver_js__WEBPACK_IMPORTED_MODULE_1__.default();
+  this.addEventListener = eventObserver.addEventListener;
+  this.dispatchEvent = eventObserver.dispatchEvent;
+  this.removeEventListener = eventObserver.removeEventListener;
+
+  this.animateOff = _baseTransition.animateOff;
+  this.animateOn = _baseTransition.animateOn;
+  this.halt = _baseTransition.halt;
+  this.isAnimated = _baseTransition.isAnimated;
+  this.remove = _baseTransition.remove;
+  this.setElement = _baseTransition.setElement;
+
+  this.fadeIn = fadeIn;
+  this.fadeOut = fadeOut;
+  this.init = init;
+
+  return this;
+}
+
+// Public static properties.
+AlphaTransition.CLASSES = CLASSES;
+
+/* harmony default export */ __webpack_exports__["default"] = (AlphaTransition);
 
 
 /***/ }),
@@ -4338,14 +4842,15 @@ module.exports = { assign: assign };
 /*!***********************************************************************************!*\
   !*** ./packages/cfpb-atomic-component/src/utilities/transition/BaseTransition.js ***!
   \***********************************************************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: module, __webpack_require__ */
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_mixins_EventObserver_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/mixins/EventObserver.js */ "./packages/cfpb-atomic-component/src/mixins/EventObserver.js");
 // Required modules.
-const Events = __webpack_require__( /*! ../../mixins/Events.js */ "./packages/cfpb-atomic-component/src/mixins/Events.js" );
 
-/* eslint-disable max-lines-per-function, max-statements */
+
+// eslint-disable-next-line max-statements
 /**
  * BaseTransition
  * @class
@@ -4370,6 +4875,15 @@ function BaseTransition( element, classes ) {
   let _addEventListenerBinded;
   let _isAnimating = false;
   let _isFlushed = false;
+
+  // Make sure required attributes are passed in.
+  if ( typeof _classes.CSS_PROPERTY === 'undefined' ||
+       typeof _classes.BASE_CLASS === 'undefined' ) {
+    throw new Error(
+      'Transitions require CSS_PROPERTY and BASE_CLASS ' +
+      'to be passed into BaseTransition.'
+    );
+  }
 
   /**
    * @returns {BaseTransition} An instance.
@@ -4456,16 +4970,20 @@ function BaseTransition( element, classes ) {
    * complete handler immediately if transition not supported.
    */
   function _addEventListener() {
+    _dom.classList.add( BaseTransition.ANIMATING_CLASS );
     _isAnimating = true;
-    // If transition is not supported, call handler directly (IE9/OperaMini).
-    if ( _transitionEndEvent ) {
-      _dom.addEventListener(
-        _transitionEndEvent,
-        _transitionCompleteBinded
-      );
-      this.trigger( BaseTransition.BEGIN_EVENT, { target: this } );
+
+    /*
+      If transition is not supported, call handler directly (IE9/OperaMini).
+      Also, if "transition-duration: 0s" is set, transitionEnd event will not
+      fire, so we need to call the handler straight away.
+    */
+    if ( _transitionEndEvent &&
+         !_dom.classList.contains( BaseTransition.NO_ANIMATION_CLASS ) ) {
+      _dom.addEventListener( _transitionEndEvent, _transitionCompleteBinded );
+      this.dispatchEvent( BaseTransition.BEGIN_EVENT, { target: this } );
     } else {
-      this.trigger( BaseTransition.BEGIN_EVENT, { target: this } );
+      this.dispatchEvent( BaseTransition.BEGIN_EVENT, { target: this } );
       _transitionCompleteBinded();
     }
   }
@@ -4479,15 +4997,22 @@ function BaseTransition( element, classes ) {
 
   /**
    * Handle the end of a transition.
+   * @param {TransitionEvent} evt - Transition event object.
+   * @returns {boolean} True if transition was cleaned up,
+   *   false if an outside transitioning property triggered this event handler.
    */
-  function _transitionComplete() {
+  function _transitionComplete( evt ) {
+    if ( evt && evt.propertyName !== _classes.CSS_PROPERTY ) {
+      return false;
+    }
+
     _removeEventListener();
-    this.trigger( BaseTransition.END_EVENT, { target: this } );
+    _dom.classList.remove( BaseTransition.ANIMATING_CLASS );
+    this.dispatchEvent( BaseTransition.END_EVENT, { target: this } );
     _isAnimating = false;
+    return true;
   }
 
-  // TODO Fix complexity issue
-  /* eslint-disable complexity */
   /**
    * Search for and remove initial BaseTransition classes that have
    * already been applied to this BaseTransition's target element.
@@ -4502,7 +5027,6 @@ function BaseTransition( element, classes ) {
       }
     }
   }
-  /* eslint-enable complexity */
 
   /**
    * Remove all transition classes, if transition is initialized.
@@ -4546,8 +5070,6 @@ function BaseTransition( element, classes ) {
     return true;
   }
 
-  // TODO Fix complexity issue
-  /* eslint-disable complexity */
   /**
    * @param {HTMLNode} elem
    *   The element to check for support of transition end event.
@@ -4567,22 +5089,22 @@ function BaseTransition( element, classes ) {
       transition:       'transitionend'
     };
 
-    let transitionEnd;
-    for ( transitionEnd in transitions ) {
-      if ( transitions.hasOwnProperty( transitionEnd ) &&
-           typeof elem.style[transitionEnd] !== 'undefined' ) {
-        transition = transitions[transitionEnd];
+    let transitionEvent;
+    for ( transitionEvent in transitions ) {
+      if ( transitions.hasOwnProperty( transitionEvent ) &&
+           typeof elem.style[transitionEvent] !== 'undefined' ) {
+        transition = transitions[transitionEvent];
         break;
       }
     }
     return transition;
   }
-  /* eslint-enable complexity */
 
   // Attach public events.
-  this.addEventListener = Events.on;
-  this.trigger = Events.trigger;
-  this.removeEventListener = Events.off;
+  const eventObserver = new _cfpb_cfpb_atomic_component_src_mixins_EventObserver_js__WEBPACK_IMPORTED_MODULE_0__.default();
+  this.addEventListener = eventObserver.addEventListener;
+  this.dispatchEvent = eventObserver.dispatchEvent;
+  this.removeEventListener = eventObserver.removeEventListener;
 
   this.animateOff = animateOff;
   this.animateOn = animateOn;
@@ -4595,26 +5117,312 @@ function BaseTransition( element, classes ) {
 
   return this;
 }
-/* eslint-enable max-lines-per-function, max-statements */
 
 // Public static constants.
 BaseTransition.BEGIN_EVENT = 'transitionBegin';
 BaseTransition.END_EVENT = 'transitionEnd';
 BaseTransition.NO_ANIMATION_CLASS = 'u-no-animation';
+BaseTransition.ANIMATING_CLASS = 'u-is-animating';
 
-module.exports = BaseTransition;
+/* harmony default export */ __webpack_exports__["default"] = (BaseTransition);
 
 
 /***/ }),
 
-/***/ "./packages/cfpb-atomic-component/src/utilities/type-checkers/index.js":
-/*!*****************************************************************************!*\
-  !*** ./packages/cfpb-atomic-component/src/utilities/type-checkers/index.js ***!
-  \*****************************************************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: module */
-/***/ ((module) => {
+/***/ "./packages/cfpb-atomic-component/src/utilities/transition/MaxHeightTransition.js":
+/*!****************************************************************************************!*\
+  !*** ./packages/cfpb-atomic-component/src/utilities/transition/MaxHeightTransition.js ***!
+  \****************************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_utilities_transition_BaseTransition_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/utilities/transition/BaseTransition.js */ "./packages/cfpb-atomic-component/src/utilities/transition/BaseTransition.js");
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_mixins_EventObserver_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/mixins/EventObserver.js */ "./packages/cfpb-atomic-component/src/mixins/EventObserver.js");
+// Required modules.
+
+
+
+// Exported constants.
+const CLASSES = {
+  CSS_PROPERTY: 'max-height',
+  BASE_CLASS:   'u-max-height-transition',
+  MH_DEFAULT:   'u-max-height-default',
+  MH_SUMMARY:   'u-max-height-summary',
+  MH_ZERO:      'u-max-height-zero'
+};
+
+/**
+ * MoveTransition
+ * @class
+ *
+ * @classdesc Initializes new MoveTransition behavior.
+ *
+ * @param {HTMLNode} element
+ *   DOM element to apply transition to.
+ * @returns {MaxHeightTransition} An instance.
+ */
+function MaxHeightTransition( element ) {
+  const _baseTransition = new _cfpb_cfpb_atomic_component_src_utilities_transition_BaseTransition_js__WEBPACK_IMPORTED_MODULE_0__.default( element, CLASSES );
+  let previousHeight;
+
+  /**
+   * @returns {MaxHeightTransition} An instance.
+   */
+  function init() {
+    _baseTransition.init();
+
+    element.style.maxHeight = element.scrollHeight + 'px';
+
+    const _transitionCompleteBinded = _transitionComplete.bind( this );
+    _baseTransition.addEventListener(
+      _cfpb_cfpb_atomic_component_src_utilities_transition_BaseTransition_js__WEBPACK_IMPORTED_MODULE_0__.default.END_EVENT,
+      _transitionCompleteBinded
+    );
+
+    return this;
+  }
+
+  /**
+   * Handle the end of a transition.
+   */
+  function _transitionComplete() {
+    this.dispatchEvent( _cfpb_cfpb_atomic_component_src_utilities_transition_BaseTransition_js__WEBPACK_IMPORTED_MODULE_0__.default.END_EVENT, { target: this } );
+
+    if ( element.scrollHeight > previousHeight ) {
+      element.style.maxHeight = element.scrollHeight + 'px';
+    }
+  }
+
+  /**
+   * Reset the max-height to the default size.
+   * @returns {PostitionTransition} An instance.
+   */
+  function maxHeightDefault() {
+    _baseTransition.applyClass( CLASSES.MH_DEFAULT );
+
+    if ( !previousHeight || element.scrollHeight > previousHeight ) {
+      previousHeight = element.scrollHeight;
+    }
+
+    return this;
+  }
+
+  /**
+   * Collapses the max-height to just a summary height.
+   * @returns {PostitionTransition} An instance.
+   */
+  function maxHeightSummary() {
+    _baseTransition.applyClass( CLASSES.MH_SUMMARY );
+
+    previousHeight = element.scrollHeight;
+
+    return this;
+  }
+
+  /**
+   * Collapses thte max-height completely.
+   * @returns {PostitionTransition} An instance.
+   */
+  function maxHeightZero() {
+    _baseTransition.applyClass( CLASSES.MH_ZERO );
+
+    previousHeight = element.scrollHeight;
+
+    return this;
+  }
+
+  /**
+   * Remove style attribute.
+   * Remove all transition classes, if transition is initialized.
+   * @returns {boolean}
+   *   True, if the element's CSS classes were touched, false otherwise.
+   */
+  function remove() {
+    element.style.maxHeight = '';
+    return _baseTransition.remove();
+  }
+
+  // Attach public events.
+  const eventObserver = new _cfpb_cfpb_atomic_component_src_mixins_EventObserver_js__WEBPACK_IMPORTED_MODULE_1__.default();
+  this.addEventListener = eventObserver.addEventListener;
+  this.dispatchEvent = eventObserver.dispatchEvent;
+  this.removeEventListener = eventObserver.removeEventListener;
+
+  this.animateOff = _baseTransition.animateOff;
+  this.animateOn = _baseTransition.animateOn;
+  this.halt = _baseTransition.halt;
+  this.isAnimated = _baseTransition.isAnimated;
+  this.setElement = _baseTransition.setElement;
+  this.remove = remove;
+
+  this.init = init;
+  this.maxHeightDefault = maxHeightDefault;
+  this.maxHeightSummary = maxHeightSummary;
+  this.maxHeightZero = maxHeightZero;
+
+  return this;
+}
+
+// Public static properties.
+MaxHeightTransition.CLASSES = CLASSES;
+
+/* harmony default export */ __webpack_exports__["default"] = (MaxHeightTransition);
+
+
+/***/ }),
+
+/***/ "./packages/cfpb-atomic-component/src/utilities/transition/MoveTransition.js":
+/*!***********************************************************************************!*\
+  !*** ./packages/cfpb-atomic-component/src/utilities/transition/MoveTransition.js ***!
+  \***********************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BaseTransition_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaseTransition.js */ "./packages/cfpb-atomic-component/src/utilities/transition/BaseTransition.js");
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_mixins_EventObserver_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/mixins/EventObserver.js */ "./packages/cfpb-atomic-component/src/mixins/EventObserver.js");
+// Required modules.
+
+
+
+// Exported constants.
+const CLASSES = {
+  CSS_PROPERTY:   'transform',
+  BASE_CLASS:     'u-move-transition',
+  MOVE_TO_ORIGIN: 'u-move-to-origin',
+  MOVE_LEFT:      'u-move-left',
+  MOVE_LEFT_2X:   'u-move-left-2x',
+  MOVE_LEFT_3X:   'u-move-left-3x',
+  MOVE_RIGHT:     'u-move-right',
+  MOVE_UP:        'u-move-up'
+};
+
+/**
+ * MoveTransition
+ * @class
+ *
+ * @classdesc Initializes new MoveTransition behavior.
+ *
+ * @param {HTMLNode} element
+ *   DOM element to apply move transition to.
+ * @returns {MoveTransition} An instance.
+ */
+function MoveTransition( element ) {
+
+  const _baseTransition = new _BaseTransition_js__WEBPACK_IMPORTED_MODULE_0__.default( element, CLASSES );
+
+  /**
+   * @returns {MoveTransition} An instance.
+   */
+  function init() {
+    _baseTransition.init();
+    const _transitionCompleteBinded = _transitionComplete.bind( this );
+    _baseTransition.addEventListener(
+      _BaseTransition_js__WEBPACK_IMPORTED_MODULE_0__.default.END_EVENT,
+      _transitionCompleteBinded
+    );
+    return this;
+  }
+
+  /**
+   * Handle the end of a transition.
+   */
+  function _transitionComplete() {
+    this.dispatchEvent( _BaseTransition_js__WEBPACK_IMPORTED_MODULE_0__.default.END_EVENT, { target: this } );
+  }
+
+  /**
+   * Move to the element's original coordinates.
+   * @returns {MoveTransition} An instance.
+   */
+  function moveToOrigin() {
+    _baseTransition.applyClass( CLASSES.MOVE_TO_ORIGIN );
+
+    return this;
+  }
+
+  /**
+   * Move to the left by applying a utility move class.
+   * @param {Number} count
+   *   How many times to move left as a multiplication of the element's width.
+   * @returns {MoveTransition} An instance.
+   */
+  function moveLeft( count ) {
+    count = count || 1;
+    const moveClasses = [
+      CLASSES.MOVE_LEFT,
+      CLASSES.MOVE_LEFT_2X,
+      CLASSES.MOVE_LEFT_3X
+    ];
+
+    if ( count < 1 || count > moveClasses.length ) {
+      throw new Error( 'MoveTransition: moveLeft count is out of range!' );
+    }
+
+    _baseTransition.applyClass( moveClasses[count - 1] );
+
+    return this;
+  }
+
+  /**
+   * Move to the right by applying a utility move class.
+   * @returns {MoveTransition} An instance.
+   */
+  function moveRight() {
+    _baseTransition.applyClass( CLASSES.MOVE_RIGHT );
+
+    return this;
+  }
+
+  /**
+   * Move up by applying a utility move class.
+   * @returns {MoveTransition} An instance.
+   */
+  function moveUp() {
+    _baseTransition.applyClass( CLASSES.MOVE_UP );
+
+    return this;
+  }
+
+  // Attach public events.
+  const eventObserver = new _cfpb_cfpb_atomic_component_src_mixins_EventObserver_js__WEBPACK_IMPORTED_MODULE_1__.default();
+  this.addEventListener = eventObserver.addEventListener;
+  this.dispatchEvent = eventObserver.dispatchEvent;
+  this.removeEventListener = eventObserver.removeEventListener;
+
+  this.animateOff = _baseTransition.animateOff;
+  this.animateOn = _baseTransition.animateOn;
+  this.halt = _baseTransition.halt;
+  this.isAnimated = _baseTransition.isAnimated;
+  this.setElement = _baseTransition.setElement;
+  this.remove = _baseTransition.remove;
+
+  this.init = init;
+  this.moveLeft = moveLeft;
+  this.moveRight = moveRight;
+  this.moveToOrigin = moveToOrigin;
+  this.moveUp = moveUp;
+
+  return this;
+}
+
+// Public static properties.
+MoveTransition.CLASSES = CLASSES;
+
+/* harmony default export */ __webpack_exports__["default"] = (MoveTransition);
+
+
+/***/ }),
+
+/***/ "./packages/cfpb-atomic-component/src/utilities/type-checkers.js":
+/*!***********************************************************************!*\
+  !*** ./packages/cfpb-atomic-component/src/utilities/type-checkers.js ***!
+  \***********************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 /* ==========================================================================
    Javascript Type Checkers
 
@@ -4780,17 +5588,17 @@ function isEmpty( value ) {
 /* eslint-enable complexity, no-mixed-operators */
 
 // Expose public methods.
-module.exports = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   isUndefined: isUndefined,
-  isDefined:   isDefined,
-  isObject:    isObject,
-  isString:    isString,
-  isNumber:    isNumber,
-  isDate:      isDate,
-  isArray:     isArray,
-  isFunction:  isFunction,
-  isEmpty:     isEmpty
-};
+  isDefined: isDefined,
+  isObject: isObject,
+  isString: isString,
+  isNumber: isNumber,
+  isDate: isDate,
+  isArray: isArray,
+  isFunction: isFunction,
+  isEmpty: isEmpty
+});
 
 
 /***/ }),
@@ -4799,20 +5607,27 @@ module.exports = {
 /*!*****************************************************!*\
   !*** ./packages/cfpb-expandables/src/Expandable.js ***!
   \*****************************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: __webpack_require__, module */
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_components_AtomicComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/components/AtomicComponent.js */ "./packages/cfpb-atomic-component/src/components/AtomicComponent.js");
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_mixins_EventObserver_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/mixins/EventObserver.js */ "./packages/cfpb-atomic-component/src/mixins/EventObserver.js");
+/* harmony import */ var _ExpandableTransition_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ExpandableTransition.js */ "./packages/cfpb-expandables/src/ExpandableTransition.js");
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_utilities_dom_traverse_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/utilities/dom-traverse.js */ "./packages/cfpb-atomic-component/src/utilities/dom-traverse.js");
 /* ==========================================================================
    Expandable Organism
    ========================================================================== */
 
-const closest = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/utilities/dom-closest */ "./packages/cfpb-atomic-component/src/utilities/dom-closest/index.js").closest;
-const Events = __webpack_require__( /*! @cfpb/cfpb-atomic-component/src/mixins/Events.js */ "./packages/cfpb-atomic-component/src/mixins/Events.js" );
-const Organism = __webpack_require__( /*! @cfpb/cfpb-atomic-component/src/components/Organism */ "./packages/cfpb-atomic-component/src/components/Organism.js" );
-const ExpandableTransition = __webpack_require__( /*! ./ExpandableTransition */ "./packages/cfpb-expandables/src/ExpandableTransition.js" );
 
-const Expandable = Organism.extend( {
+
+
+
+
+const eventObserver = new _cfpb_cfpb_atomic_component_src_mixins_EventObserver_js__WEBPACK_IMPORTED_MODULE_1__.default();
+
+const Expandable = _cfpb_cfpb_atomic_component_src_components_AtomicComponent_js__WEBPACK_IMPORTED_MODULE_0__.default.extend( {
+
   ui: {
     base:    '.o-expandable',
     target:  '.o-expandable_target',
@@ -4846,27 +5661,27 @@ const Expandable = Organism.extend( {
  * Initialize a new expandable.
  */
 function initialize() {
-  const transition = new ExpandableTransition(
+  const transition = new _ExpandableTransition_js__WEBPACK_IMPORTED_MODULE_2__.default(
     this.ui.content
   );
   this.transition = transition.init();
   this.transition.addEventListener( 'expandBegin', expandBeginHandler.bind( this ) );
   this.transition.addEventListener( 'collapseEnd', collapseEndHandler.bind( this ) );
 
-  if ( this.ui.content.classList.contains( ExpandableTransition.CLASSES.EXPANDED ) ) {
+  if ( this.ui.content.classList.contains( _ExpandableTransition_js__WEBPACK_IMPORTED_MODULE_2__.default.CLASSES.EXPANDED ) ) {
     this.ui.target.classList.add( this.classes.targetExpanded );
   } else {
     this.ui.target.classList.add( this.classes.targetCollapsed );
     this.ui.content.classList.add( 'u-hidden' );
   }
 
-  const expandableGroup = closest( this.ui.target, '.' + this.classes.group );
+  const expandableGroup = (0,_cfpb_cfpb_atomic_component_src_utilities_dom_traverse_js__WEBPACK_IMPORTED_MODULE_3__.closest)( this.ui.target, '.' + this.classes.group );
 
   this.isAccordionGroup = expandableGroup !== null &&
     expandableGroup.classList.contains( this.classes.groupAccordion );
 
   if ( this.isAccordionGroup ) {
-    Events.on(
+    eventObserver.addEventListener(
       'accordionActivated',
       _accordionActivatedHandler.bind( this )
     );
@@ -4895,7 +5710,7 @@ function expandableClickHandler() {
     if ( this.activeAccordion ) {
       this.activeAccordion = false;
     } else {
-      Events.trigger( 'accordionActivated', { target: this } );
+      eventObserver.dispatchEvent( 'accordionActivated', { target: this } );
       this.activeAccordion = true;
     }
   }
@@ -4937,7 +5752,7 @@ function getLabelText() {
   return this.ui.label.textContent.trim();
 }
 
-module.exports = Expandable;
+/* harmony default export */ __webpack_exports__["default"] = (Expandable);
 
 
 /***/ }),
@@ -4946,16 +5761,19 @@ module.exports = Expandable;
 /*!***************************************************************!*\
   !*** ./packages/cfpb-expandables/src/ExpandableTransition.js ***!
   \***************************************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: module, __webpack_require__ */
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_utilities_transition_BaseTransition_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/utilities/transition/BaseTransition.js */ "./packages/cfpb-atomic-component/src/utilities/transition/BaseTransition.js");
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_mixins_EventObserver_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/mixins/EventObserver.js */ "./packages/cfpb-atomic-component/src/mixins/EventObserver.js");
 // Required modules.
-const Events = __webpack_require__( /*! @cfpb/cfpb-atomic-component/src/mixins/Events.js */ "./packages/cfpb-atomic-component/src/mixins/Events.js" );
-const BaseTransition = __webpack_require__( /*! @cfpb/cfpb-atomic-component/src/utilities/transition/BaseTransition */ "./packages/cfpb-atomic-component/src/utilities/transition/BaseTransition.js" );
+
+
 
 // Exported constants.
 const CLASSES = {
+  CSS_PROPERTY: 'max-height',
   BASE_CLASS:   'o-expandable_content__transition',
   EXPANDED:     'o-expandable_content__expanded',
   COLLAPSED:    'o-expandable_content__collapsed',
@@ -4973,7 +5791,7 @@ const CLASSES = {
  * @returns {ExpandableTransition} An instance.
  */
 function ExpandableTransition( element ) {
-  const _baseTransition = new BaseTransition( element, CLASSES );
+  const _baseTransition = new _cfpb_cfpb_atomic_component_src_utilities_transition_BaseTransition_js__WEBPACK_IMPORTED_MODULE_0__.default( element, CLASSES );
   let previousHeight;
 
   /**
@@ -4982,7 +5800,7 @@ function ExpandableTransition( element ) {
   function init() {
     _baseTransition.init();
     _baseTransition.addEventListener(
-      BaseTransition.END_EVENT,
+      _cfpb_cfpb_atomic_component_src_utilities_transition_BaseTransition_js__WEBPACK_IMPORTED_MODULE_0__.default.END_EVENT,
       _transitionComplete.bind( this )
     );
 
@@ -5056,9 +5874,10 @@ function ExpandableTransition( element ) {
   }
 
   // Attach public events.
-  this.addEventListener = Events.on;
-  this.dispatchEvent = Events.trigger;
-  this.removeEventListener = Events.off;
+  const eventObserver = new _cfpb_cfpb_atomic_component_src_mixins_EventObserver_js__WEBPACK_IMPORTED_MODULE_1__.default();
+  this.addEventListener = eventObserver.addEventListener;
+  this.dispatchEvent = eventObserver.dispatchEvent;
+  this.removeEventListener = eventObserver.removeEventListener;
 
   this.animateOff = _baseTransition.animateOff;
   this.animateOn = _baseTransition.animateOn;
@@ -5079,7 +5898,887 @@ function ExpandableTransition( element ) {
 // Public static properties.
 ExpandableTransition.CLASSES = CLASSES;
 
-module.exports = ExpandableTransition;
+/* harmony default export */ __webpack_exports__["default"] = (ExpandableTransition);
+
+
+/***/ }),
+
+/***/ "./packages/cfpb-forms/src/organisms/Multiselect.js":
+/*!**********************************************************!*\
+  !*** ./packages/cfpb-forms/src/organisms/Multiselect.js ***!
+  \**********************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_utilities_atomic_helpers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/utilities/atomic-helpers.js */ "./packages/cfpb-atomic-component/src/utilities/atomic-helpers.js");
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_utilities_media_helpers_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/utilities/media-helpers.js */ "./packages/cfpb-atomic-component/src/utilities/media-helpers.js");
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_mixins_EventObserver_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/mixins/EventObserver.js */ "./packages/cfpb-atomic-component/src/mixins/EventObserver.js");
+/* harmony import */ var _MultiselectModel_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MultiselectModel.js */ "./packages/cfpb-forms/src/organisms/MultiselectModel.js");
+/* harmony import */ var _MultiselectUtils_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MultiselectUtils.js */ "./packages/cfpb-forms/src/organisms/MultiselectUtils.js");
+/* harmony import */ var _cfpb_cfpb_icons_src_icons_close_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @cfpb/cfpb-icons/src/icons/close.svg */ "./packages/cfpb-icons/src/icons/close.svg");
+/* harmony import */ var _cfpb_cfpb_icons_src_icons_close_svg__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_cfpb_cfpb_icons_src_icons_close_svg__WEBPACK_IMPORTED_MODULE_5__);
+// Required modules.
+
+
+
+
+
+
+
+
+const BASE_CLASS = 'o-multiselect';
+
+/**
+ * Multiselect
+ * @class
+ *
+ * @classdesc Initializes a new Multiselect molecule.
+ *
+ * @param {HTMLNode} element
+ *   The DOM element within which to search for the molecule.
+ * @returns {Multiselect} An instance.
+ */
+function Multiselect( element ) { // eslint-disable-line max-statements
+
+  const CHECKBOX_INPUT_CLASS = 'a-checkbox';
+  const TEXT_INPUT_CLASS = 'a-text-input';
+
+  /* TODO: As the multiselect is developed further
+     explore whether it should use an updated
+     class name or data-* attribute in the
+     markup so that it doesn't apply globally by default. */
+  element.classList.add( BASE_CLASS );
+
+  // Constants for direction.
+  const DIR_PREV = 'prev';
+  const DIR_NEXT = 'next';
+
+  // Constants for key binding.
+  const KEY_RETURN = 13;
+  const KEY_SPACE = 32;
+  const KEY_ESCAPE = 27;
+  const KEY_UP = 38;
+  const KEY_DOWN = 40;
+  const KEY_TAB = 9;
+
+  // Internal vars.
+  let _dom = (0,_cfpb_cfpb_atomic_component_src_utilities_atomic_helpers_js__WEBPACK_IMPORTED_MODULE_0__.checkDom)( element, BASE_CLASS );
+  let _isBlurSkipped = false;
+  let _name;
+  let _placeholder;
+  let _model;
+  let _options;
+  let _optionsData;
+
+  // Markup elems, conver this to templating engine in the future.
+  let _containerDom;
+  let _selectionsDom;
+  let _headerDom;
+  let _searchDom;
+  let _fieldsetDom;
+  let _optionsDom;
+  const _optionItemDoms = [];
+  let _instance;
+
+  /**
+   * Set up and create the multiselect.
+   * @returns {Multiselect} An instance.
+   */
+  function init() {
+    if ( !(0,_cfpb_cfpb_atomic_component_src_utilities_atomic_helpers_js__WEBPACK_IMPORTED_MODULE_0__.setInitFlag)( _dom ) ) {
+      return this;
+    }
+
+    if ( (0,_cfpb_cfpb_atomic_component_src_utilities_media_helpers_js__WEBPACK_IMPORTED_MODULE_1__.isMobileUserAgent)() ) {
+      return this;
+    }
+
+    _instance = this;
+    _name = _dom.name || _dom.id;
+    _placeholder = _dom.getAttribute( 'placeholder' );
+    _options = _dom.options || [];
+
+    if ( _options.length > 0 ) {
+      _model = new _MultiselectModel_js__WEBPACK_IMPORTED_MODULE_3__.default( _options, _name ).init();
+      _optionsData = _model.getOptions();
+      const newDom = _populateMarkup();
+
+      /* Removes <select> element,
+         and re-assign DOM reference. */
+      _dom.parentNode.removeChild( _dom );
+      _dom = newDom;
+
+      /* We need to set init flag again since we've created a new <div>
+         to replace the <select> element. */
+      (0,_cfpb_cfpb_atomic_component_src_utilities_atomic_helpers_js__WEBPACK_IMPORTED_MODULE_0__.setInitFlag)( _dom );
+
+      _bindEvents();
+    }
+
+    return this;
+  }
+
+  /**
+   * Expand the multiselect drop down.
+   * @returns {Multiselect} An instance.
+   */
+  function expand() {
+    _containerDom.classList.add( 'u-active' );
+    _fieldsetDom.classList.remove( 'u-invisible' );
+    _fieldsetDom.setAttribute( 'aria-hidden', false );
+    _instance.dispatchEvent( 'expandBegin', { target: _instance } );
+
+    return _instance;
+  }
+
+  /**
+   * Collapse the multiselect drop down.
+   * @returns {Multiselect} An instance.
+   */
+  function collapse() {
+    _containerDom.classList.remove( 'u-active' );
+    _fieldsetDom.classList.add( 'u-invisible' );
+    _fieldsetDom.setAttribute( 'aria-hidden', true );
+    _model.resetIndex();
+    _instance.dispatchEvent( 'expandEnd', { target: _instance } );
+
+    return _instance;
+  }
+
+  /**
+   * Populates and injects the markup for the custom multiselect.
+   * @returns {HTMLNode} Newly created <div> element to hold the multiselect.
+   */
+  function _populateMarkup() {
+    // Add a container for our markup
+    _containerDom = _MultiselectUtils_js__WEBPACK_IMPORTED_MODULE_4__.default.create( 'div', {
+      className: BASE_CLASS,
+      around:    _dom
+    } );
+
+    // Create all our markup but wait to manipulate the DOM just once
+    _selectionsDom = _MultiselectUtils_js__WEBPACK_IMPORTED_MODULE_4__.default.create( 'ul', {
+      className: BASE_CLASS + '_choices',
+      inside:    _containerDom
+    } );
+
+    _headerDom = _MultiselectUtils_js__WEBPACK_IMPORTED_MODULE_4__.default.create( 'header', {
+      className: BASE_CLASS + '_header'
+    } );
+
+    _searchDom = _MultiselectUtils_js__WEBPACK_IMPORTED_MODULE_4__.default.create( 'input', {
+      className:    BASE_CLASS + '_search ' + TEXT_INPUT_CLASS,
+      type:         'text',
+      placeholder:  _placeholder || 'Select up to five',
+      inside:       _headerDom,
+      id:           _name,
+      autocomplete: 'off'
+    } );
+
+    _fieldsetDom = _MultiselectUtils_js__WEBPACK_IMPORTED_MODULE_4__.default.create( 'fieldset', {
+      'className':   BASE_CLASS + '_fieldset u-invisible',
+      'aria-hidden': 'true'
+    } );
+
+    _optionsDom = _MultiselectUtils_js__WEBPACK_IMPORTED_MODULE_4__.default.create( 'ul', {
+      className: BASE_CLASS + '_options',
+      inside:    _fieldsetDom
+    } );
+
+    _optionsData.forEach( function( option ) {
+      const _optionsItemDom = _MultiselectUtils_js__WEBPACK_IMPORTED_MODULE_4__.default.create( 'li', {
+        'data-option': option.value,
+        'class': 'm-form-field m-form-field__checkbox'
+      } );
+
+      _MultiselectUtils_js__WEBPACK_IMPORTED_MODULE_4__.default.create( 'input', {
+        'id':      option.id,
+        // Type must come before value or IE fails
+        'type':    'checkbox',
+        'value':   option.value,
+        'name':    _name,
+        'class':   CHECKBOX_INPUT_CLASS + ' ' + BASE_CLASS + '_checkbox',
+        'inside':  _optionsItemDom,
+        'checked': option.checked
+      } );
+
+      _MultiselectUtils_js__WEBPACK_IMPORTED_MODULE_4__.default.create( 'label', {
+        'for':         option.id,
+        'textContent': option.text,
+        'className':   BASE_CLASS + '_label a-label',
+        'inside':      _optionsItemDom
+      } );
+
+      _optionItemDoms.push( _optionsItemDom );
+      _optionsDom.appendChild( _optionsItemDom );
+
+      if ( option.checked ) {
+        _createSelectedItem( _selectionsDom, option );
+      }
+    } );
+
+    // Write our new markup to the DOM.
+    _containerDom.appendChild( _headerDom );
+    _containerDom.appendChild( _fieldsetDom );
+
+    return _containerDom;
+  }
+
+  /**
+   * @param {HTMLNode} selectionsDom - The UL item to inject list item into.
+   * @param {HTMLNode} option - The OPTION item to extract content from.
+   */
+  function _createSelectedItem( selectionsDom, option ) {
+    const selectionsItemDom = _MultiselectUtils_js__WEBPACK_IMPORTED_MODULE_4__.default.create( 'li', {
+      'data-option': option.value
+    } );
+
+    const selectionsItemLabelDom = _MultiselectUtils_js__WEBPACK_IMPORTED_MODULE_4__.default.create( 'button', {
+      type: 'button',
+      innerHTML: '<label for=' + option.id + '>' +
+                 option.text + (_cfpb_cfpb_icons_src_icons_close_svg__WEBPACK_IMPORTED_MODULE_5___default()) + '</label>',
+      inside: selectionsItemDom
+    } );
+
+    selectionsDom.appendChild( selectionsItemDom );
+    selectionsItemDom.appendChild( selectionsItemLabelDom );
+
+    selectionsItemLabelDom.addEventListener( 'click', _selectionClickHandler );
+    selectionsItemLabelDom.addEventListener( 'keydown', _selectionKeyDownHandler );
+  }
+
+  /**
+   * Highlights an option in the list.
+   * @param {string} direction Direction to highlight compared to the
+   *                           current focus.
+   */
+  function _highlight( direction ) {
+    if ( direction === DIR_NEXT ) {
+      _model.setIndex( _model.getIndex() + 1 );
+    } else if ( direction === DIR_PREV ) {
+      _model.setIndex( _model.getIndex() - 1 );
+    }
+
+    const index = _model.getIndex();
+    if ( index > -1 ) {
+      let filteredIndex = index;
+      const filterIndices = _model.getFilterIndices();
+      if ( filterIndices.length > 0 ) {
+        filteredIndex = filterIndices[index];
+      }
+      const option = _model.getOption( filteredIndex );
+      const value = option.value;
+      const item = _optionsDom.querySelector( '[data-option="' + value + '"]' );
+      const input = item.querySelector( 'input' );
+
+      _isBlurSkipped = true;
+      input.focus();
+    } else {
+      _isBlurSkipped = false;
+      _searchDom.focus();
+    }
+  }
+
+  /**
+   * Tracks a user's selections and updates the list in the dom.
+   * @param {string} value The value of the option the user has chosen.
+   */
+  function _updateSelections( value ) {
+    const optionIndex = _MultiselectUtils_js__WEBPACK_IMPORTED_MODULE_4__.default.indexOfObject(
+      _optionsData,
+      'value',
+      value
+    );
+    const option = _optionsData[optionIndex] || _optionsData[_model.getIndex()];
+
+    if ( option ) {
+      if ( option.checked ) {
+        if ( _optionsDom.classList.contains( 'u-max-selections' ) ) {
+          _optionsDom.classList.remove( 'u-max-selections' );
+        }
+
+        const dataOptionSel = '[data-option="' + option.value + '"]';
+        const _selectionsItemDom = _selectionsDom.querySelector( dataOptionSel );
+
+        if ( typeof _selectionsItemDom !== 'undefined' ) {
+          _selectionsDom.removeChild( _selectionsItemDom );
+        }
+      } else {
+        _createSelectedItem( _selectionsDom, option );
+      }
+      _model.toggleOption( optionIndex );
+
+      if ( _model.isAtMaxSelections() ) {
+        _optionsDom.classList.add( 'u-max-selections' );
+      }
+
+      _instance.dispatchEvent( 'selectionsUpdated', { target: _instance } );
+    }
+
+    _model.resetIndex();
+    _isBlurSkipped = false;
+
+    if ( _fieldsetDom.getAttribute( 'aria-hidden' ) === 'false' ) {
+      _searchDom.focus();
+    }
+  }
+
+  /**
+   * Evaluates the list of options based on the user's query in the
+   * search input.
+   * @param {string} value Text the user has entered in the search query.
+   */
+  function _evaluate( value ) {
+    _resetFilter();
+    _model.resetIndex();
+    const matchedIndices = _model.filterIndices( value );
+    _filterList( matchedIndices );
+  }
+
+  /**
+   * Resets the search input and filtering.
+   */
+  function _resetSearch() {
+    _searchDom.value = '';
+    _resetFilter();
+  }
+
+  /**
+   * Filter the options list.
+   * Every time we filter we have two lists of indices:
+   * - The matching options (filterIndices).
+   * - The matching options of the last filter (_lastFilterIndices).
+   * We need to turn off the filter for any of the last filter matches
+   * that are not in the new set, and turn on the filter for the matches
+   * that are not in the last set.
+   * @param {Array} filterIndices - List of indices to filter from the options.
+   * @returns {boolean} True if options are filtered, false otherwise.
+   */
+  function _filterList( filterIndices ) {
+    if ( filterIndices.length > 0 ) {
+      _filterMatches();
+      return true;
+    }
+
+    _filterNoMatches();
+    return false;
+  }
+
+  /**
+   * Resets the filtered option list.
+   */
+  function _resetFilter() {
+    _optionsDom.classList.remove( 'u-filtered', 'u-no-results' );
+
+    for ( let i = 0, len = _optionsDom.children.length; i < len; i++ ) {
+      _optionsDom.children[i].classList.remove( 'u-filter-match' );
+    }
+
+    _model.clearFilter();
+  }
+
+  /**
+   * Set the filtered matched state.
+   */
+  function _filterMatches() {
+    _optionsDom.classList.remove( 'u-no-results' );
+    _optionsDom.classList.add( 'u-filtered' );
+
+    let filteredIndices = _model.getLastFilterIndices();
+    for ( let i = 0, len = filteredIndices.length; i < len; i++ ) {
+      _optionItemDoms[filteredIndices[i]].classList.remove( 'u-filter-match' );
+    }
+
+    filteredIndices = _model.getFilterIndices();
+    for ( let j = 0, len = filteredIndices.length; j < len; j++ ) {
+      _optionItemDoms[filteredIndices[j]].classList.add( 'u-filter-match' );
+    }
+  }
+
+  /**
+   * Updates the list of options to show the user there
+   * are no matching results.
+   */
+  function _filterNoMatches() {
+    _optionsDom.classList.add( 'u-no-results' );
+    _optionsDom.classList.remove( 'u-filtered' );
+  }
+
+  /**
+   * Binds events to the search input, option list, and checkboxes.
+   */
+  function _bindEvents() {
+
+    _headerDom.addEventListener( 'mousemove', function( event ) {
+      const target = event.target;
+      // Check if we're over the down-arrow on the right side of the input.
+      if ( event.layerX > target.offsetWidth - 35 ) {
+        target.style.cursor = 'pointer';
+      } else {
+        target.style.cursor = 'auto';
+      }
+    } );
+
+    _searchDom.addEventListener( 'input', function() {
+      _evaluate( this.value );
+    } );
+
+    _searchDom.addEventListener( 'focus', function() {
+      if ( _fieldsetDom.getAttribute( 'aria-hidden' ) === 'true' ) {
+        expand();
+      }
+    } );
+
+    _searchDom.addEventListener( 'blur', function() {
+      if ( !_isBlurSkipped &&
+           _fieldsetDom.getAttribute( 'aria-hidden' ) === 'false' ) {
+        collapse();
+      }
+    } );
+
+    _searchDom.addEventListener( 'keydown', function( event ) {
+      const key = event.keyCode;
+
+      if ( _fieldsetDom.getAttribute( 'aria-hidden' ) === 'true' &&
+            key !== KEY_TAB ) {
+        expand();
+      }
+
+      if ( key === KEY_RETURN ) {
+        event.preventDefault();
+        _highlight( DIR_NEXT );
+      } else if ( key === KEY_ESCAPE ) {
+        _resetSearch();
+        collapse();
+      } else if ( key === KEY_DOWN ) {
+        _highlight( DIR_NEXT );
+      } else if ( key === KEY_TAB &&
+                  !event.shiftKey &&
+                  _fieldsetDom.getAttribute( 'aria-hidden' ) === 'false' ) {
+        collapse();
+      }
+    } );
+
+    _optionsDom.addEventListener( 'mousedown', function() {
+      _isBlurSkipped = true;
+    } );
+
+    _optionsDom.addEventListener( 'keydown', function( event ) {
+      const key = event.keyCode;
+      const target = event.target;
+      const checked = target.checked;
+
+      if ( key === KEY_RETURN ) {
+        event.preventDefault();
+
+        /* Programmatically checking a checkbox does not fire a change event
+        so we need to manually create an event and dispatch it from the input.
+        */
+        target.checked = !checked;
+        const evt = document.createEvent( 'HTMLEvents' );
+        evt.initEvent( 'change', false, true );
+        target.dispatchEvent( evt );
+      } else if ( key === KEY_ESCAPE ) {
+        _searchDom.focus();
+        collapse();
+      } else if ( key === KEY_UP ) {
+        _highlight( DIR_PREV );
+      } else if ( key === KEY_DOWN ) {
+        _highlight( DIR_NEXT );
+      }
+    } );
+
+    _fieldsetDom.addEventListener( 'mousedown', function() {
+      _isBlurSkipped = true;
+    } );
+
+    const inputs = _optionsDom.querySelectorAll( 'input' );
+    for ( let i = 0, len = inputs.length; i < len; i++ ) {
+      inputs[i].addEventListener( 'change', _changeHandler );
+    }
+
+    // Add event listeners to any selections that are present at page load.
+    const labelButtons = _selectionsDom.querySelectorAll( 'button' );
+    for ( let j = 0, len = labelButtons.length; j < len; j++ ) {
+      labelButtons[j].addEventListener( 'click', _selectionClickHandler );
+      labelButtons[j].addEventListener( 'keydown', _selectionKeyDownHandler );
+    }
+  }
+
+  /**
+   * This passes the click of the selected item button down to the label it
+   * contains. This is only required for browsers (IE11) that prevent the
+   * click of a selected item from cascading from the button down to the label
+   * it contains.
+   * @param {MouseEvent} event - The mouse click event object.
+   */
+  function _selectionClickHandler( event ) {
+    const target = event.target;
+    if ( target.tagName === 'BUTTON' ) {
+      event.preventDefault();
+      target.removeEventListener( 'click', _selectionClickHandler );
+      target.querySelector( 'label' ).click();
+    }
+  }
+
+  /**
+   * @param {KeyEvent} event - The key down event object.
+   */
+  function _selectionKeyDownHandler( event ) {
+    if ( event.keyCode === KEY_SPACE ||
+         event.keyCode === KEY_RETURN ) {
+      const label = event.target.querySelector( 'label' );
+      const checkbox = _optionsDom.querySelector( '#' + label.getAttribute( 'for' ) );
+      checkbox.click();
+    }
+  }
+
+  /**
+   * Handles the functions to trigger on the checkbox change.
+   * @param   {Event} event The checkbox change event.
+   */
+  function _changeHandler( event ) {
+    _updateSelections( event.target.value );
+    _resetSearch();
+  }
+
+  // Attach public events.
+  this.init = init;
+  this.expand = expand;
+  this.collapse = collapse;
+
+  const eventObserver = new _cfpb_cfpb_atomic_component_src_mixins_EventObserver_js__WEBPACK_IMPORTED_MODULE_2__.default();
+  this.addEventListener = eventObserver.addEventListener;
+  this.removeEventListener = eventObserver.removeEventListener;
+  this.dispatchEvent = eventObserver.dispatchEvent;
+
+  return this;
+}
+
+Multiselect.BASE_CLASS = BASE_CLASS;
+
+/* harmony default export */ __webpack_exports__["default"] = (Multiselect);
+
+
+/***/ }),
+
+/***/ "./packages/cfpb-forms/src/organisms/MultiselectModel.js":
+/*!***************************************************************!*\
+  !*** ./packages/cfpb-forms/src/organisms/MultiselectModel.js ***!
+  \***************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// Undefined return value for void methods.
+let UNDEFINED;
+
+// How many options may be checked.
+const MAX_SELECTIONS = 5;
+
+/**
+ * Escapes a string.
+ * @param {string} str The string to escape.
+ * @returns {string} The escaped string.
+ */
+function stringEscape( str ) {
+  return str.replace( /[-\\^$*+?.()|[\]{}]/g, '\\$&' );
+}
+
+/**
+ * Tests whether a string matches another.
+ * @param   {string}  x The control string.
+ * @param   {string}  y The comparison string.
+ * @returns {boolean}   True if `x` and `y` match, false otherwise.
+ */
+function stringMatch( x, y ) {
+  return RegExp( stringEscape( y.trim() ), 'i' ).test( x );
+}
+
+/**
+ * @class
+ * MultiselectModel
+ * @param {HTMLOptionsCollection} options -
+ *   Set of options from a <select> element.
+ * @param {string} name - a unique name for this multiselect.
+ */
+function MultiselectModel( options, name ) {
+  const _options = options;
+  const _name = name;
+  let _optionsData = [];
+
+  let _selectedIndices = [];
+  let _filterIndices = [];
+
+  /* When the options list is filtered, we store a list of filtered indices
+  so that when the filter changes we can reset the last matched options. */
+  let _lastFilterIndices = [];
+
+  // Which option is in focus. -1 means the focus is on the search input.
+  let _index = -1;
+
+  /**
+   * @returns {MultiselectModel} An instance.
+   */
+  function init() {
+    _optionsData = _formatOptions( _options );
+
+    return this;
+  }
+
+  /**
+   * Cleans up a list of options for saving to memory.
+   * @param {HTMLOptionsCollection} list - The options from a select element.
+   * @returns {Array} An array of option objects.
+   */
+  function _formatOptions( list ) {
+    let item;
+    const cleaned = [];
+
+    let isChecked = false;
+    for ( let i = 0, len = list.length; i < len; i++ ) {
+      item = list[i];
+      isChecked = item.defaultSelected;
+      cleaned.push( {
+        id:      _getOptionId( item ),
+        value:   item.value,
+        text:    item.text,
+        checked: isChecked
+      } );
+
+      // If an option is initially checked, we need to record it.
+      if ( isChecked ) {
+        _selectedIndices.push( i );
+      }
+    }
+
+    return cleaned;
+  }
+
+  /**
+   * Toggle checked value of an option.
+   * @param {number} index - The index position of the option in the list.
+   * @returns {boolean} A value of true is checked and false is unchecked.
+   */
+  function toggleOption( index ) {
+    _optionsData[index].checked = !_optionsData[index].checked;
+
+    if ( _selectedIndices.length < MAX_SELECTIONS &&
+         _optionsData[index].checked ) {
+      _selectedIndices.push( index );
+      _selectedIndices.sort();
+
+      return true;
+    }
+    // We're over the max selections, reverse the check of the option.
+    _optionsData[index].checked = false;
+    _selectedIndices = _selectedIndices.filter(
+      function( currIndex ) {
+        return currIndex !== index;
+      }
+    );
+
+    return false;
+  }
+
+  /**
+   * @returns {boolean}
+   *   True if the maximum number of options are checked, false otherwise.
+   */
+  function isAtMaxSelections() {
+    return _selectedIndices.length === MAX_SELECTIONS;
+  }
+
+  /**
+   * Search for a query string in the options text and return the indices of
+   * the matching positions in the options array.
+   * @param {string} query - A query string.
+   * @returns {Array} List of indices of the matching entries from the options.
+   */
+  function filterIndices( query ) {
+    // Convert query to a string if its not.
+    if ( Object.prototype.toString.call( query ) !== '[object String]' ) {
+      query = '';
+    }
+    _lastFilterIndices = _filterIndices;
+    if ( _optionsData.length > 0 ) {
+      _filterIndices = _optionsData.reduce(
+        function( acc, item, index ) {
+          return _searchAggregator( acc, item, index, query );
+        },
+        []
+      );
+    }
+    // Reset index position.
+    _index = -1;
+
+    return _filterIndices;
+  }
+
+  /**
+   * Retrieve an option object from the options list.
+   * @param {number} index - The index position in the options list.
+   * @returns {Object} The option object with text, value, and checked value.
+   */
+  function getOption( index ) {
+    return _optionsData[index];
+  }
+
+  /**
+   * Utility function for Array.reduce() used in searchIndices.
+   * @param {Array} aggregate - The reducer's accumulator.
+   * @param {Object} item - Each item in the collection.
+   * @param {number} index - The index of item in the collection.
+   * @param {string} value - The value of item in the collection.
+   * @returns {Array} The reducer's accumulator.
+   */
+  function _searchAggregator( aggregate, item, index, value ) {
+    if ( stringMatch( item.text, value ) ) {
+      aggregate.push( index );
+    }
+    return aggregate;
+  }
+
+  /**
+   * Set the index of the collection (represents the highlighted option).
+   * @param {number} value - The index to set.
+   */
+  function setIndex( value ) {
+    const filterCount = _filterIndices.length;
+    const count = filterCount === 0 ? _optionsData.length : filterCount;
+    if ( value < 0 ) {
+      _index = -1;
+    } else if ( value >= count ) {
+      _index = count - 1;
+    } else {
+      _index = value;
+    }
+  }
+
+  /**
+   * @returns {number} The current index (highlighted option).
+   */
+  function getIndex() {
+    return _index;
+  }
+
+  /**
+   * @param {HTMLNode} item - An option HTML node.
+   * @returns {string} A (hopefully) unique ID.
+   *   If it's not unique, we have a duplicate option value.
+   */
+  function _getOptionId( item ) {
+    return _name + '-' + item.value.trim().replace( /\s+/g, '-' ).toLowerCase();
+  }
+
+  this.init = init;
+
+  // This is used to check an item in the collection.
+  this.toggleOption = toggleOption;
+  this.getSelectedIndices = function() { return _selectedIndices; };
+  this.isAtMaxSelections = isAtMaxSelections;
+
+  // This is used to search the items in the collection.
+  this.filterIndices = filterIndices;
+  this.clearFilter = function() {
+    _filterIndices = _lastFilterIndices = [];
+    return UNDEFINED;
+  };
+  this.getFilterIndices = function() { return _filterIndices; };
+  this.getLastFilterIndices = function() { return _lastFilterIndices; };
+
+  // These are used to highlight items in the collection.
+  this.getIndex = getIndex;
+  this.setIndex = setIndex;
+  this.resetIndex = function() {
+    _index = -1;
+    return _index;
+  };
+
+  // This is used to retrieve items from the collection.
+  this.getOption = getOption;
+  this.getOptions = function() { return _optionsData; };
+
+  return this;
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (MultiselectModel);
+
+
+/***/ }),
+
+/***/ "./packages/cfpb-forms/src/organisms/MultiselectUtils.js":
+/*!***************************************************************!*\
+  !*** ./packages/cfpb-forms/src/organisms/MultiselectUtils.js ***!
+  \***************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_utilities_dom_traverse_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/utilities/dom-traverse.js */ "./packages/cfpb-atomic-component/src/utilities/dom-traverse.js");
+
+
+/**
+ * Searches an array for the first object with the matching key:value pair.
+ * @param   {Array}  array - List to query through for the expected value.
+ * @param   {string} key   - The key to check the value against.
+ * @param   {string} val   - The value to match to the key.
+ * @returns {number}       Returns the index of a match, otherwise -1.
+ */
+function indexOfObject( array, key, val ) {
+  let match = -1;
+
+  if ( !array.length > 0 ) {
+    return match;
+  }
+
+  array.forEach( function( item, index ) {
+    if ( item[key] === val ) {
+      match = index;
+    }
+  } );
+
+  return match;
+}
+
+/**
+ * Shortcut for creating new dom elements.
+ * @param {string} tag - The html elem to create.
+ * @param {Object} options - The options for building the elem.
+ * @returns {HTMLNode} The created elem.
+ */
+function create( tag, options ) {
+  const elem = document.createElement( tag );
+
+  let i;
+  for ( i in options ) {
+    if ( options.hasOwnProperty( i ) ) {
+      const val = options[i];
+      let ref;
+
+      if ( i === 'inside' ) {
+        ref = (0,_cfpb_cfpb_atomic_component_src_utilities_dom_traverse_js__WEBPACK_IMPORTED_MODULE_0__.queryOne)( val );
+        ref.appendChild( elem );
+      } else if ( i === 'around' ) {
+        ref = (0,_cfpb_cfpb_atomic_component_src_utilities_dom_traverse_js__WEBPACK_IMPORTED_MODULE_0__.queryOne)( val );
+        ref.parentNode.insertBefore( elem, ref );
+        elem.appendChild( ref );
+      } else if ( i in elem ) {
+        elem[i] = val;
+      } else {
+        elem.setAttribute( i, val );
+      }
+    }
+  }
+
+  return elem;
+}
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  indexOfObject: indexOfObject,
+  create: create
+});
 
 
 /***/ }),
@@ -5088,31 +6787,34 @@ module.exports = ExpandableTransition;
 /*!*******************************************!*\
   !*** ./packages/cfpb-tables/src/Table.js ***!
   \*******************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: module, __webpack_require__ */
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_components_AtomicComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/components/AtomicComponent.js */ "./packages/cfpb-atomic-component/src/components/AtomicComponent.js");
+/* harmony import */ var _TableRowLinks_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableRowLinks.js */ "./packages/cfpb-tables/src/TableRowLinks.js");
+/* harmony import */ var _TableSortable_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TableSortable.js */ "./packages/cfpb-tables/src/TableSortable.js");
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_utilities_standard_type_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/utilities/standard-type.js */ "./packages/cfpb-atomic-component/src/utilities/standard-type.js");
 /* ==========================================================================
    Table Organism
    ========================================================================== */
 
 
-const config = __webpack_require__( /*! @cfpb/cfpb-atomic-component/src/utilities/config */ "./packages/cfpb-atomic-component/src/utilities/config.js" );
-const Organism = __webpack_require__( /*! @cfpb/cfpb-atomic-component/src/components/Organism */ "./packages/cfpb-atomic-component/src/components/Organism.js" );
-const TableSortable = __webpack_require__( /*! ./TableSortable */ "./packages/cfpb-tables/src/TableSortable.js" );
-const TableRowLinks = __webpack_require__( /*! ./TableRowLinks */ "./packages/cfpb-tables/src/TableRowLinks.js" );
 
-const Table = Organism.extend( {
+
+
+
+const Table = _cfpb_cfpb_atomic_component_src_components_AtomicComponent_js__WEBPACK_IMPORTED_MODULE_0__.default.extend( {
   ui: {
     base: '.o-table'
   },
 
-  modifiers: [ TableSortable, TableRowLinks ]
+  modifiers: [ _TableSortable_js__WEBPACK_IMPORTED_MODULE_2__.default, _TableRowLinks_js__WEBPACK_IMPORTED_MODULE_1__.default ]
 } );
 
-Table.constants.DIRECTIONS = config.DIRECTIONS;
+Table.constants.DIRECTIONS = _cfpb_cfpb_atomic_component_src_utilities_standard_type_js__WEBPACK_IMPORTED_MODULE_3__.DIRECTIONS;
 
-module.exports = Table;
+/* harmony default export */ __webpack_exports__["default"] = (Table);
 
 
 /***/ }),
@@ -5121,10 +6823,11 @@ module.exports = Table;
 /*!***************************************************!*\
   !*** ./packages/cfpb-tables/src/TableRowLinks.js ***!
   \***************************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: __webpack_require__, module */
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_utilities_dom_traverse_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/utilities/dom-traverse.js */ "./packages/cfpb-atomic-component/src/utilities/dom-traverse.js");
 /* ==========================================================================
    Table Row Links
 
@@ -5132,7 +6835,7 @@ module.exports = Table;
    ========================================================================== */
 
 
-const closest = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/utilities/dom-closest */ "./packages/cfpb-atomic-component/src/utilities/dom-closest/index.js").closest;
+
 
 const TableRowLinks = {
   ui: {
@@ -5156,14 +6859,14 @@ function onRowLinkClick( event ) {
   if ( target && target.tagName === 'A' ) {
     return;
   }
-  target = closest( event.target, 'tr' );
+  target = (0,_cfpb_cfpb_atomic_component_src_utilities_dom_traverse_js__WEBPACK_IMPORTED_MODULE_0__.closest)( event.target, 'tr' );
   const link = target.querySelector( 'a' );
   if ( link ) {
     window.location = link.getAttribute( 'href' );
   }
 }
 
-module.exports = TableRowLinks;
+/* harmony default export */ __webpack_exports__["default"] = (TableRowLinks);
 
 
 /***/ }),
@@ -5172,10 +6875,12 @@ module.exports = TableRowLinks;
 /*!***************************************************!*\
   !*** ./packages/cfpb-tables/src/TableSortable.js ***!
   \***************************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: __webpack_require__, module */
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_utilities_dom_traverse_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/utilities/dom-traverse.js */ "./packages/cfpb-atomic-component/src/utilities/dom-traverse.js");
+/* harmony import */ var _cfpb_cfpb_atomic_component_src_utilities_standard_type_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/utilities/standard-type.js */ "./packages/cfpb-atomic-component/src/utilities/standard-type.js");
 /* ==========================================================================
    Table Sortablle
 
@@ -5183,10 +6888,10 @@ module.exports = TableRowLinks;
    ========================================================================== */
 
 
-const config = __webpack_require__( /*! @cfpb/cfpb-atomic-component/src/utilities/config */ "./packages/cfpb-atomic-component/src/utilities/config.js" );
-const closest = __webpack_require__(/*! @cfpb/cfpb-atomic-component/src/utilities/dom-closest */ "./packages/cfpb-atomic-component/src/utilities/dom-closest/index.js").closest;
-const DIRECTIONS = config.DIRECTIONS;
-const UNDEFINED = config.UNDEFINED;
+
+
+
+let UNDEFINED;
 
 const TableSortable = {
   ui: {
@@ -5226,9 +6931,9 @@ function initialize() {
   if ( this.ui.sortButton ) {
     this.sortColumnIndex = this.getColumnIndex();
 
-    this.sortDirection = DIRECTIONS.UP;
+    this.sortDirection = _cfpb_cfpb_atomic_component_src_utilities_standard_type_js__WEBPACK_IMPORTED_MODULE_1__.DIRECTIONS.UP;
     if ( this.ui.sortButton.classList.contains( this.classes.sortDown ) ) {
-      this.sortDirection = DIRECTIONS.DOWN;
+      this.sortDirection = _cfpb_cfpb_atomic_component_src_utilities_standard_type_js__WEBPACK_IMPORTED_MODULE_1__.DIRECTIONS.DOWN;
     }
 
     this.updateTable();
@@ -5247,9 +6952,9 @@ function bindProperties() {
       return sortDirection;
     },
     set: function( value ) {
-      if ( value === DIRECTIONS.UP ) {
+      if ( value === _cfpb_cfpb_atomic_component_src_utilities_standard_type_js__WEBPACK_IMPORTED_MODULE_1__.DIRECTIONS.UP ) {
         this.sortClass = this.classes.sortUp;
-      } else if ( value === DIRECTIONS.DOWN ) {
+      } else if ( value === _cfpb_cfpb_atomic_component_src_utilities_standard_type_js__WEBPACK_IMPORTED_MODULE_1__.DIRECTIONS.DOWN ) {
         this.sortClass = this.classes.sortDown;
       }
       sortDirection = value;
@@ -5264,7 +6969,7 @@ function bindProperties() {
  * @returns {number} The column index of the active sort column.
  */
 function getColumnIndex( element ) {
-  return closest( element || this.ui.sortButton, 'td, th' ).cellIndex;
+  return (0,_cfpb_cfpb_atomic_component_src_utilities_dom_traverse_js__WEBPACK_IMPORTED_MODULE_0__.closest)( element || this.ui.sortButton, 'td, th' ).cellIndex;
 }
 
 /**
@@ -5322,7 +7027,7 @@ function updateTableDom() {
   }
 
   tableBody.appendChild( documentFragment );
-  this.trigger( 'table:updated' );
+  this.dispatchEvent( 'table:updated' );
 
   return tableBody;
 }
@@ -5343,7 +7048,7 @@ function updateTableDom() {
  */
 function tableDataSorter( direction, sortType ) {
   return function( a, b ) {
-    const sign = direction === DIRECTIONS.DOWN ? -1 : 1;
+    const sign = direction === _cfpb_cfpb_atomic_component_src_utilities_standard_type_js__WEBPACK_IMPORTED_MODULE_1__.DIRECTIONS.DOWN ? -1 : 1;
     let order = 0;
     const regex = /[^\d.-]/g;
 
@@ -5384,7 +7089,7 @@ function onSortableClick( event ) {
   } else {
     this.ui.sortButton = event.target;
     this.sortColumnIndex = this.getColumnIndex();
-    this.sortDirection = DIRECTIONS.UP;
+    this.sortDirection = _cfpb_cfpb_atomic_component_src_utilities_standard_type_js__WEBPACK_IMPORTED_MODULE_1__.DIRECTIONS.UP;
   }
   // The active sort class is changing when the sort direction changes.
   this.ui.sortButton.classList.add( this.sortClass );
@@ -5393,7 +7098,7 @@ function onSortableClick( event ) {
   return this;
 }
 
-module.exports = TableSortable;
+/* harmony default export */ __webpack_exports__["default"] = (TableSortable);
 
 
 /***/ })
@@ -5425,31 +7130,31 @@ module.exports = TableSortable;
 /******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
+/******/ 	!function() {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
+/******/ 		__webpack_require__.n = function(module) {
 /******/ 			var getter = module && module.__esModule ?
-/******/ 				() => module['default'] :
-/******/ 				() => module;
+/******/ 				function() { return module['default']; } :
+/******/ 				function() { return module; };
 /******/ 			__webpack_require__.d(getter, { a: getter });
 /******/ 			return getter;
 /******/ 		};
-/******/ 	})();
+/******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
+/******/ 	!function() {
 /******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 		__webpack_require__.d = function(exports, definition) {
 /******/ 			for(var key in definition) {
 /******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
 /******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
 /******/ 				}
 /******/ 			}
 /******/ 		};
-/******/ 	})();
+/******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
+/******/ 	!function() {
 /******/ 		__webpack_require__.g = (function() {
 /******/ 			if (typeof globalThis === 'object') return globalThis;
 /******/ 			try {
@@ -5458,23 +7163,23 @@ module.exports = TableSortable;
 /******/ 				if (typeof window === 'object') return window;
 /******/ 			}
 /******/ 		})();
-/******/ 	})();
+/******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
-/******/ 	})();
+/******/ 	!function() {
+/******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
+/******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
+/******/ 	!function() {
 /******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
+/******/ 		__webpack_require__.r = function(exports) {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
-/******/ 	})();
+/******/ 	}();
 /******/ 	
 /************************************************************************/
 /******/ 	// startup

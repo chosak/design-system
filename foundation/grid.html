@@ -10,6 +10,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/design-system/dist/css/main.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css">
   <script>
       // Confirm availability of JS and remove no-js class from html
       var docElement = document.documentElement;
@@ -1605,5 +1606,16 @@ content first in the source order, but it’s here if you absolutely need it.</p
 
   
 
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  <script type="text/javascript"> docsearch({
+    apiKey: 'e0e427e6a1bb2aceded9422f45a36253',
+      indexName: 'design-system',
+      inputSelector: '#search-box',
+      debug: false, // Set debug to true if you want to inspect the dropdown
+      algoliaOptions: {
+        hitsPerPage: 10
+      }
+   });
+  </script>
 </body>
 </html>
